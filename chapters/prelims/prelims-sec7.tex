@@ -1,0 +1,232 @@
+\section{The Axiom of Choice, Order, and Zorn's Lemma}
+
+\begin{exercise}
+  Let $(A, \leq)$ be a partially ordered set and $B$ a nonempty subset.
+  A \textbf{lower bound} of $B$ is an element $d \in A$ such that $d \leq b$ for \emph{every} $b \in B$.
+  A \textbf{greatest lower bound (g.l.b.)} of $B$ is a lower bound $d_0$ of $B$ such that $d \leq d_0$ for every other lower bound $d$ of $B$.
+  A \textbf{least upper bound (l.u.b.)} of $B$ is an upper bound $t_0$ of $B$ such that $t_0 \leq t$ for every other upper bound $t$ of $B$.
+  $(A, \leq)$ is a \textbf{lattice} if for all $a, b \in A$ the set $\{a, b\}$ has both a greatest lower bound and a least upper bound.
+  \begin{enumerate}[label=(\alph*)]
+    \item If $S \neq \varnothing$, then the power set $P(S)$ ordered by set-theoretic inclusion is a lattice, which has a unique maximal element.
+    \item Give an example of a partially ordered set which is \emph{not} a lattice.
+    \item Give an example of a lattice with no maximal element and an example of a partially ordered set with two maximal elements.
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item For $X, Y \subset S$ the greatest lower bound is
+    \[
+      X\cap Y.
+    \]
+    The least upper bound is
+    \[
+      X\cup Y.
+    \]
+    Thus every pair $X, Y$ has a g.l.b. and l.u.b., so $(P(S), \subset)$ is a lattice.
+
+    A maximal element in $P(S)$ is an element that is not properly contained in any other element.
+    The whole set $S$ is an upper bound for every subset of $S$ and is not contained in any strictly larger subset of $S$, so $S$ is a maximal element.
+    It is unique because if $T$ is any subset with $U \subset T$ for all $U \subset S$, then in particular $S \subset T$, so $T = S$.
+
+    \item Take the set $A = \{a, b\}$ with the only order relations being reflexivity:
+    \[
+      a\leq a,\qquad b\leq b,
+    \]
+    For the pair $a, b$ there is no lower bound other than possibly elements $\leq a$ and $\leq b$; but the only candidates are $a$ and  $b$ themselves, and neither is $\leq$ the other.
+    Hence there is no greatest lower bound of $a, b$.
+    (Similarly there is no least upper bound.) Therefore this poset is not a lattice.
+
+    \item Take the integers $\Z$ with the usual order.
+    For any $m, n \in \Z$ the least upper bound is $\max m, n$ and the greatest lower bound is $\min m, n$; thus $(\Z, \leq)$ is a lattice.
+    But $\Z$ has no maximal element because for every $n \in \Z$ there exists $n + 1 > n$.
+    So $\Z$ is a lattice with no maximal element.
+    
+    Let $A = \{0, a, b\}$ and define the order by
+    \[
+      0\le a,\qquad 0\le b.
+    \]
+  \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+  A lattice $(A, \leq)$ (see Exercise 1) is said to be \textbf{complete} if every nonempty subset of $A$ has both a least upper bound and a greatest lower bound.
+  A map of partially ordered sets $f : A \to B$ is said to preserve order if $a \leq a'$ in $A$ implies $f(a) \leq f(a')$ in $B$.
+  Prove that an order-preserving map $f$ of a complete lattice $A$ into itself has at least one fixed element (that is, an $a \in A$ such that $f(a) = a$).
+\end{exercise}
+
+\begin{solution}
+  Let $S = \{\,a \in A : f(a) \leq a\,\}$ be the set of all pre-fixed points of $f$.  
+  Since $A$ is complete, it has a greatest element, say $1$.  
+  Because $f$ preserves order, $f(1) \leq 1$, so $1 \in S$.  
+  Thus $S \neq \varnothing$ and, since $A$ is complete, $S$ has a g.l.b; call it
+  \[
+    m = \inf S.
+  \]
+
+  \textit{First}, we show that $f(m) \leq m$.  
+  For every $s \in S$ we have $m \leq s$, hence $f(m) \leq f(s)$ by order preservation.  
+  Since $s \in S$, $f(s) \leq s$, and thus $f(m) \leq s$ for all $s \in S$.  
+  Hence $f(m)$ is a lower bound of $S$, and by maximality of $m$ as greatest lower bound, $f(m) \leq m$.
+
+  \textit{Second}, we show that $m \leq f(m)$.  
+  Since $m$ is a lower bound of $S$ and $f$ is order-preserving, the argument above shows that $f(m)$ is also a lower bound of $S$.  
+  Therefore $f(m) \leq s$ for all $s \in S$, so $f(m)$ is a lower bound of $S$.  
+  Because $m$ is the greatest lower bound, we must have $m \leq f(m)$.
+
+  Combining the inequalities $f(m) \leq m$ and $m \leq f(m)$, we conclude that $f(m) = m$.  
+  Thus $f$ has a fixed element.
+\end{solution}
+
+\begin{exercise}
+  Exhibit a well ordering of the set $\Q$ of rational numbers.
+\end{exercise}
+
+\begin{solution}
+  Write each rational number in \(\Q\) in its unique reduced form \(a/b\) with \(b>0\) and \(\gcd(a,b)=1\).
+  (Under this convention the rational \(0\) is represented uniquely as \(0/1\).)
+
+  Define a binary relation \(\trianglelefteq\) on \(\Q\) by declaring
+  \[
+    \frac{a}{b}\trianglelefteq\frac{c}{d}
+  \]
+  iff either
+  \begin{enumerate}
+    \item \( |a|+b<|c|+d\), or
+    \item \( |a|+b=|c|+d\) and \(a<c\), or
+    \item \( |a|+b=|c|+d,\ a=c\), and \(b\le d\).
+  \end{enumerate}
+  Since every rational is written in the unique reduced form specified above, the quantities \(|a|+b\), \(a\), and \(b\) are well defined for each rational, so \(\trianglelefteq\) is well defined.
+
+  It is immediate that \(\trianglelefteq\) is a total order.
+  To see that it is a well ordering, let \(S\subseteq\Q\) be nonempty and for each \(x=a/b\in S\) set \(N(x)=|a|+b\in\N\).
+  The set \(\{N(x):x\in S\}\) is a nonempty subset of \(\N\), hence has a least element \(n_0\).
+  The subset \(T=\{x\in S:N(x)=n_0\}\) is therefore nonempty.
+  Among elements of \(T\), the numerators form a finite (hence well-ordered) subset of \(\Z\), so there is a least numerator \(a_0\).
+  Finally, among rationals in \(T\) with numerator \(a_0\) the denominator is minimal for the \(\trianglelefteq\)-least element.
+  Thus \(T\) (and hence \(S\)) has a least element with respect to \(\trianglelefteq\).
+  Therefore \(\trianglelefteq\) is a well ordering of \(\Q\).
+\end{solution}
+
+\begin{exercise}
+  Let $S$ be a set.
+  A \textbf{choice function} for $S$ is a function $f$ from the set of all nonempty subsets of $S$ to $S$ such that $f(A) \in A$ for all $A \neq \varnothing$, $A \subset S$.
+  Show that the Axiom of Choice is equivalent to the statement that every set $S$ has a choice function.
+\end{exercise}
+
+\begin{solution}
+  We show the two statements are equivalent.
+
+  \medskip\noindent\textbf{(AC \(\Rightarrow\) choice functions exist).}
+  Let \(S\) be any set and let \(\mathcal{I}\) denote the collection of all nonempty subsets of \(S\).
+  If \(\mathcal{I}=\varnothing\) then \(S=\varnothing\), and the unique function \(\varnothing\to\varnothing\) is a choice function for \(S\).
+  Thus assume \(\mathcal{I}\neq\varnothing\).
+  Consider the family \(\{X_A\}_{A\in\mathcal{I}}\) where \(X_A=A\) for each \(A\in\mathcal{I}\).
+  Every \(X_A\) is nonempty by definition, and the family is indexed by the nonempty set \(\mathcal{I}\).
+  By the Axiom of Choice (the product of a family of nonempty sets indexed by a nonempty set is nonempty), the product \(\prod_{A\in\mathcal{I}} X_A\) is nonempty.
+  An element of this product is precisely a function \(f\colon\mathcal{I}\to S\) with \(f(A)\in X_A=A\) for each \(A\); that is exactly a choice function for \(S\).
+  Hence every set \(S\) admits a choice function.
+
+  \medskip\noindent\textbf{(Choice functions exist \(\Rightarrow\) AC).}
+  Assume every set \(T\) admits a choice function \(c_T\) defined on the collection of nonempty subsets of \(T\).
+  Let \(\{X_i\}_{i\in I}\) be any family of nonempty sets indexed by a nonempty set \(I\).
+  Put \(S=\bigcup_{i\in I} X_i\).
+  Then each \(X_i\) is a nonempty subset of \(S\), so the hypothesis supplies a choice function \(c_S\) for \(S\).
+  Define \(g\colon I\to S\) by \(g(i):=c_S(X_i)\). By construction \(g(i)\in X_i\) for every \(i\in I\), so \(g\in\prod_{i\in I}X_i\).
+  Hence the product is nonempty.
+  This establishes the Axiom of Choice.
+
+  \medskip\noindent Therefore the two statements are equivalent.
+\end{solution}
+
+\begin{exercise}
+  Let $S$ be the set of all points $(x, y)$ in the plane with $y \leq 0$.
+  Define an ordering by $(x_1, y_1) \leq (x_2, y_2) \iff x_1 = x_2 \text{ and } y_1 \leq y_2$.
+  Show that this is a partial ordering of $S$, and that $S$ has infinitely many maximal elements.
+\end{exercise}
+
+\begin{solution}
+  Let \(S=\{(x,y)\in\R^2: y\leq 0\}\) and define
+  \[
+  (x_1,y_1)\leq (x_2,y_2)\iff x_1=x_2\ \text{and}\ y_1\leq y_2 .
+  \]
+
+  \textbf{(i) This relation is a partial order.}
+  \begin{itemize}
+    \item \emph{Reflexive:} For any \((x,y)\in S\) we have \(x=x\) and \(y\leq y\), so \((x,y)\leq (x,y)\).
+    \item \emph{Antisymmetric:} If \((x_1,y_1)\leq (x_2,y_2)\) and \((x_2,y_2)\leq (x_1,y_1)\), then \(x_1=x_2\) and \(y_1\leq y_2\), and also \(x_2=x_1\) and \(y_2\leq y_1\).
+    Hence \(y_1=y_2\) and therefore \((x_1,y_1)=(x_2,y_2)\).
+    \item \emph{Transitive:} If \((x_1,y_1)\leq (x_2,y_2)\) and \((x_2,y_2)\leq (x_3,y_3)\), then \(x_1=x_2\) and \(x_2=x_3\), so \(x_1=x_3\), and \(y_1\leq y_2\leq y_3\), hence \(y_1\leq y_3\).
+    Thus \((x_1,y_1)\leq (x_3,y_3)\).
+  \end{itemize}
+  Therefore the relation is reflexive, antisymmetric, and transitive, i.e. a partial order.
+
+  \bigskip
+
+  \textbf{(ii) \(S\) has infinitely many maximal elements.}
+
+  Fix any real number \(x_0\).
+  For that \(x_0\) the point \((x_0,0)\in S\) satisfies the following: if \((x_0,0)\leq  (x,y)\) then \(x=x_0\) and \(0\leq y\).
+  Since every element of \(S\) has \(y\leq 0\), the only possibility is \(y=0\), so \((x,y)=(x_0,0)\).
+  Thus there is no element of \(S\) strictly greater than \((x_0,0)\); i.e. \((x_0,0)\) is maximal.
+
+  As \(x_0\) ranges over \(\R\) we obtain the family \(\{(x,0):x\in\R\}\) of maximal elements,which is infinite (indeed uncountable).
+  Hence \(S\) has infinitely many maximal elements.
+
+  (Observe also that any point \((x,y)\) with \(y<0\) is not maximal because \((x,y)<(x,0)\).)
+\end{solution}
+
+\begin{exercise}
+  Prove that if all the sets in the family $\{A_i \mid i \in I \neq \varnothing\}$ are nonempty, then each of the projections $\pi_k \colon \prod_{i \in I} A_i \to A_k$ is surjective.
+\end{exercise}
+
+\begin{solution}
+  Let \(\{A_i\}_{i\in I}\) be a family of sets with \(A_i\neq\varnothing\) for each \(i\in I\).
+  Fix \(k\in I\) and let \(\pi_k:\prod_{i\in I}A_i\to A_k\) be the projection onto the \(k\)-th coordinate.
+  We must show that \(\pi_k\) is surjective, i.e. that for every \(a\in A_k\) there exists \(f\in\prod_{i\in I}A_i\) with \(\pi_k(f)=f(k)=a\).
+
+  For a given \(a\in A_k\) we need to define a function \(f:I\to\bigcup_{i\in I}A_i\) such that \(f(i)\in A_i\) for all \(i\in I\) and \(f(k)=a\).
+  To do this we must choose, for each \(i\in I-\{k\}\), an element \(f(i)\in A_i\).
+  The existence of a choice function selecting one element from each \(A_i\) (for \(i\neq k\)) is exactly an instance of the Axiom of Choice.
+  Assuming Choice (or equivalently the hypothesis that the product \(\prod_{i\in I}A_i\) is nonempty), pick such elements \(f(i)\) for all \(i\neq k\), and put \(f(k)=a\).
+  Then \(f\in\prod_{i\in I}A_i\) and \(\pi_k(f)=a\).
+  Since \(a\) was arbitrary, \(\pi_k\) is surjective.
+
+  \medskip
+
+  \noindent\textbf{Remark.} If the index set \(I\) is finite, no form of the Axiom of Choice is needed: one can choose elements from the finitely many \(A_i\) inductively (or by a finite product of nonempty sets being nonempty).
+  The use of Choice becomes essential only when \(I\) is infinite.
+\end{solution}
+
+\begin{exercise}
+  Let $(A, \leq)$ be a linearly ordered set.
+  The \textbf{immediate successor} of $a \in A$ (if it exists) is the least element in the set $\{x \in A \mid a < x\}$.
+  Prove that if $A$ is well ordered by $\leq$, then at most one element of $A$ has no immediate successor.
+  Give an example of a linearly ordered set in which precisely two elements have no immediate successor.
+\end{exercise}
+
+\begin{solution}
+  First remark: if \(a\in A\) has no immediate successor, that means the set \(\{x\in A:x>a\}\) either is empty (so \(a\) is maximal) or is nonempty but has no least element.
+
+  \medskip\noindent\textbf{At most one element has no immediate successor.}
+  Suppose for contradiction that \(a\) and \(b\) are two distinct elements of \(A\) with no immediate successor.
+  Since \(A\) is linearly ordered, either \(a<b\) or \(b<a\).
+  Without loss of generality assume \(a<b\).
+  Then \(b\in\{x\in A:x>a\}\), so this set is nonempty.
+  But \(A\) is well ordered, hence every nonempty subset has a least element; therefore \(\{x\in A:x>a\}\) has a least element \(c\).
+  By definition \(c\) is the immediate successor of \(a\), contradicting the assumption that \(a\) has no immediate successor.
+  Thus it is impossible for two distinct elements to both lack immediate successors; at most one element of \(A\) can have no immediate successor.
+  \(\square\)
+
+  \medskip\noindent\textbf{Example with exactly two elements having no immediate successor.}
+  Let
+  \[
+    B=\{0\}\cup\{1/n : n\in\mathbf{N}^*\}\subset\R
+  \]
+  equipped with the usual order inherited from \(\R\).
+  Every element of \(B\) except \(0\) is of the form \(1/n\) for some \(n\in\mathbf{N}^*\).
+  For \(n\geq 2\), the least element strictly greater than \(1/n\) is \(1/(n-1)\), so \(1/n\) has an immediate successor.
+  The element \(1=1/1\) is maximal in \(B\) (no larger element of \(B\) exists), hence it has no immediate successor.
+  The element \(0\) also has no immediate successor: the set \(\{x\in B:x>0\}=\{1/n:n\in\mathbf{N}^*\}\) has no least element because for each \(1/n\) there is \(1/(n+1)\in B\) with \(0<1/(n+1)<1/n\).
+  Therefore \(0\) has no immediate successor. No other elements of \(B\) lack immediate successors, so exactly two elements of \(B\) (namely \(0\) and \(1\)) have no immediate successor.
+\end{solution}

@@ -1,0 +1,47 @@
+% Standard AMS packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathtools}
+
+% Misc
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{geometry}
+
+\geometry{margin=1.1in}
+
+% Theorem environments
+\numberwithin{equation}{chapter}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[chapter]
+
+% Exercise environment
+\newtheoremstyle{exercise}
+  {12pt}{12pt}{\itshape}{}{\bfseries}{.}{0.5em}{\thmname{Exercise}\ \thmnumber{#2}}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Exercise}
+
+% Solution environment
+\newenvironment{solution}{
+  \begin{proof}[Solution]
+    \renewcommand{\qedsymbol}{}
+}{
+  \end{proof}
+}
+    
+% Hyperref
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
