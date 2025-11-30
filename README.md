@@ -108,10 +108,3 @@ Full compatibility with both GitHub and Overleaf workflows
 ## 📫 Contact / Questions
 
 If something looks inconsistent, unclear, or stylistically odd, feel free to open an issue or discussion.
-
-add a build badge (GitHub Actions)
-
-give you a .gitignore tailored for LaTeX
-
-
-Just tell me what you want next.
