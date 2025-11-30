@@ -105,7 +105,7 @@ Full compatibility with both GitHub and Overleaf workflows
 
 ---
 
-📫 Contact / Questions
+## 📫 Contact / Questions
 
 If something looks inconsistent, unclear, or stylistically odd, feel free to open an issue or discussion.
 
