@@ -1,0 +1,687 @@
+\section{Cardinal Numbers}
+
+\setcounter{exercise}{0}
+
+\begin{exercise}
+  Let \(I_0=\varnothing\) and for each \(n\in\mathbf{N}^*\) let \(I_n=\{1,2,3,\dots,n\}\).
+  \begin{enumerate}[label=(\alph*)]
+    \item \(I_n\) is not equipollent to any of its proper subsets [\emph{Hint}: induction].
+    \item \(I_m\) and \(I_n\) are equipollent if and only if \(m=n\).
+    \item \(I_m\) is equipollent to a subset of \(I_n\) but \(I_n\) is not equipollent to any subset of \(I_m\) if and only if $m<n$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+  Recall that \(I_0=\varnothing\) and \(I_n=\{1,2,\dots,n\}\) for \(n\ge 1\).
+
+  \medskip\noindent\textbf{Lemma.}
+  For every \(n\ge 0\), every injective map \(g\colon I_n \to I_n\) is surjective (hence bijective).
+
+  \begin{proof}
+    We proceed by strong induction on \(n\).
+
+    \emph{Base cases.}
+    For \(n=0\), the statement is trivial:
+    the only map \(\varnothing \to \varnothing\) is bijective.
+    For \(n=1\), any injective map \(g:\{1\}\to\{1\}\) must send \(1\) to \(1\), so it is surjective.
+
+    \emph{Inductive step.}
+    Fix \(n\ge 2\) and assume the claim holds for all \(k<n\).
+    Let \(g:I_n\to I_n\) be injective.
+    Suppose, for a contradiction, that \(g\) is not surjective.
+    Then \(g(I_n)\) is a proper subset of \(I_n\), so there exists an element of \(I_n\) not in the image of \(g\); choose \(m\) to be the largest such element.
+    (A largest element exists since \(I_n\) is finite and totally ordered.)
+
+    Because \(m\notin g(I_n)\), the image of \(g\) is contained in \(I_n-\{m\}\).
+    Define
+    \[
+      \phi:I_n-\{m\}\longrightarrow I_{n-1},\qquad \phi(k)=
+      \begin{cases}
+        k,& k<m,\\
+        k-1,& k>m.
+      \end{cases}
+    \]
+    Define also
+    \[
+      \phi^{-1}:I_{n-1}\longrightarrow I_n-\{m\},\qquad \phi^{-1}(j)=
+      \begin{cases}
+        j,& j<m,\\
+        j+1,& j\ge m.
+      \end{cases}
+    \]
+    A direct check shows that \(\phi\) and \(\phi^{-1}\) are inverse bijections.
+
+    Now consider the composition
+    \[
+      \psi=\phi\circ g\circ\phi^{-1}:I_{n-1}\to I_{n-1}.
+    \]
+    The map \(\psi\) is injective, since it is a composition of injective maps.
+    By the induction hypothesis, \(\psi\) is surjective, hence bijective.
+    Since \(\phi^{-1}\) is also bijective, the composition
+    \[
+      \phi^{-1}\circ\psi = g\circ\phi^{-1}
+    \]
+    is bijective.
+    In particular, \(g\circ\phi^{-1}\) is surjective onto \(I_n-\{m\}\).
+    This means that the restriction
+    \[
+      g|_{I_n-\{m\}} : I_n-\{m\} \longrightarrow I_n-\{m\}
+    \]
+    is surjective.
+
+    Now consider \(g(m)\).
+    Since \(m\notin g(I_n)\) by assumption, we must have \(g(m)\in I_n-\{m\}\).
+    But because \(g|_{I_n-\{m\}}\) is surjective, there exists some \(j\in I_n-\{m\}\) with \(g(j)=g(m)\), contradicting the injectivity of \(g\). 
+    This contradiction shows that \(g\) must be surjective.
+
+    This completes the induction and the proof of the lemma.
+  \end{proof}
+
+  \medskip\noindent\textbf{(a) \(I_n\) is not equipollent to any of its proper subsets.}
+
+  Assume, for a contradiction, that there exists a bijection \(f:I_n\to S\) with \(S\subsetneq I_n\).
+  Let \(i:S\hookrightarrow I_n\) denote the inclusion map.
+  Then \(i\circ f:I_n\to I_n\) is injective.
+  By the Lemma, \(i\circ f\) is surjective.
+  But \((i\circ f)(I_n)=i(S)=S\), a proper subset of \(I_n\), which is impossible.
+  Hence \(I_n\) is not equipollent to any of its proper subsets.
+
+  \medskip\noindent\textbf{(b) \(I_m\) and \(I_n\) are equipollent if and only if \(m=n\).}
+
+  If \(m=n\), the identity map is a bijection.
+  Conversely, suppose \(I_m\) and \(I_n\) are equipollent and assume \(m\neq n\).
+  Without loss of generality, let \(m<n\).
+  Then a bijection \(I_m\to I_n\) would make \(I_n\) equipollent to a proper subset of itself, contradicting part (a).
+  Thus \(m=n\).
+
+  \medskip\noindent\textbf{(c) \(I_m\) is equipollent to a subset of \(I_n\) but \(I_n\) is not equipollent to any subset of \(I_m\) if and only if \(m<n\).}
+
+  If \(m<n\), the inclusion \(I_m\hookrightarrow I_n\) is injective, so \(I_m\) is equipollent to the subset \(I_m\subset I_n\).
+  If \(I_n\) were equipollent to a subset of \(I_m\), then \(I_n\) would be equipollent to a proper subset of itself, contradicting part (a).
+  Hence the stated asymmetry holds when \(m<n\).
+
+  Conversely, suppose the asymmetry in the statement holds.
+  The existence of an injection \(I_m\to I_n\) implies \(m\le n\).
+  If \(m=n\), then the two sets are equipollent, contradicting the assumption.
+  Therefore \(m<n\).
+  This completes the proof.
+\end{solution}
+
+\begin{exercise}
+  \begin{enumerate}[label=(\alph*)]
+    \item Every infinite set is equipollent to one of its proper subsets.
+    \item A set is finite if and only if it is not equipollent to one of its proper subsets [see Exercise 1].
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+
+    \item \textbf{Every infinite set is equipollent to one of its proper subsets (assuming the Axiom of Choice).}
+
+    Assume the Axiom of Choice in the form that every set admits a choice function.
+    Let \(S\) be an infinite set.
+    Using a choice function, we construct an infinite sequence of distinct elements of \(S\).
+
+    Let \(\mathcal{P}^*(S)\) denote the collection of all nonempty subsets of \(S\), and let \(c:\mathcal{P}^*(S)\to S\) be a choice function.
+    Define inductively
+    \[
+      S_1=S,\qquad s_1=c(S_1),
+    \]
+    and, having chosen distinct elements \(s_1,\dots,s_n\), set
+    \[
+      S_{n+1}=S-\{s_1,\dots,s_n\},\qquad s_{n+1}=c(S_{n+1}).
+    \]
+    Since \(S\) is infinite, each \(S_{n+1}\) is nonempty, so the construction continues indefinitely.
+    Thus we obtain an infinite sequence \((s_n)_{n\ge1}\) of distinct elements of \(S\).
+
+    Define a map \(f:S\to S\) by
+    \[
+      f(s_n)=s_{n+1}\quad(n\ge1),\qquad f(x)=x\ \text{for }x\notin\{s_n:n\ge1\}.
+    \]
+    Then \(f\) is injective: it is the identity off \(\{s_n\}\), and on \(\{s_n\}\) it is a shift.
+    Moreover, \(f\) is not surjective, since \(s_1\) is not in the image.
+    Hence \(f(S)\subsetneq S\), and since \(f:S\to f(S)\) is a bijection, \(S\) is equipollent to a proper subset of itself.
+
+    \medskip
+    \emph{Remark.} The statement proved here is not provable in ZF alone.
+    Without the Axiom of Choice, there may exist infinite sets that are not equipollent to any proper subset (so-called \emph{Dedekind-finite} infinite sets).
+    Thus part~(a) genuinely requires some form of Choice.
+
+    \item \textbf{A set is finite if and only if it is not equipollent to one of its proper subsets (assuming the Axiom of Choice).}
+
+    If \(S\) is finite, then \(S\) is equipollent to \(I_n\) for some \(n\), and by Exercise~1(a) no finite set is equipollent to any proper subset of itself.
+    Hence a finite set is not equipollent to a proper subset.
+
+    Conversely, suppose \(S\) is not finite, i.e.\ \(S\) is infinite.
+    By part~(a), assuming the Axiom of Choice, \(S\) is equipollent to a proper subset of itself.
+    Therefore, a set is finite if and only if it is not equipollent to one of its proper subsets.
+  \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+  \begin{enumerate}[label=(\alph*)]
+   \item \(\mathbb{Z}\) is a denumerable set.
+   \item The set \(\mathbb{Q}\) of rational numbers is denumerable.
+   [Hint: show that \(|\mathbb{Z}|\le|\mathbb{Q}|\le|\mathbb{Z}\times\mathbb{Z}|=|\mathbb{Z}|\).]
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item \textbf{\(\mathbb{Z}\) is denumerable.}
+
+    Define \(f:\mathbb{N}\to\mathbb{Z}\) by
+    \[
+      f(0)=0,\qquad f(2n-1)=n,\qquad f(2n)=-n\quad (n\ge1).
+    \]
+    Then \(f\) is bijective:
+    every integer occurs exactly once (positive integers at odd inputs, negative integers at even inputs, and \(0\) at \(0\)).
+    Hence \(\mathbb{Z}\) is denumerable.
+
+    \item \textbf{\(\mathbb{Q}\) is denumerable.}
+
+    We show that  \(|\mathbb{Z}|\le|\mathbb{Q}|\le|\mathbb{Z}\times\mathbb{Z}|\), and that \(|\mathbb{Z}\times\mathbb{Z}|=|\mathbb{Z}|\).
+
+    First, \(\mathbb{Z}\subset\mathbb{Q}\) via \(n\mapsto n/1\), so the inclusion gives an injection \(\mathbb{Z}\hookrightarrow\mathbb{Q}\); hence \(|\mathbb{Z}|\le|\mathbb{Q}|\).
+
+    Next define \(g:\mathbb{Q}\to \mathbb{Z}\times\mathbb{Z}\) by sending each rational \(r\) to its reduced numerator--denominator pair:
+    write \(r=a/b\) with \(a\in\mathbb{Z}\), \(b\in\mathbb{Z}-\{0\}\), \(\gcd(a,b)=1\), and \(b>0\), and set \(g(r)=(a,b)\).
+    The representation \(a/b\) with these conditions is unique, so \(g\) is injective.
+    Hence \(|\mathbb{Q}|\le|\mathbb{Z}\times\mathbb{Z}|\).
+
+    Finally, \(\mathbb{Z}\times\mathbb{Z}\) is denumerable. Since \(\mathbb{Z}\) is denumerable by part (a), it suffices to exhibit a bijection \(\mathbb{N}\times\mathbb{N}\to\mathbb{N}\) and then transport it to \(\mathbb{Z}\times\mathbb{Z}\) using a bijection \(\mathbb{N}\to\mathbb{Z}\).
+    For example, the Cantor pairing function
+    \[
+      \pi(m,n)=\frac{(m+n)(m+n+1)}{2}+n
+    \]
+    is a bijection \(\mathbb{N}\times\mathbb{N}\to\mathbb{N}\).
+    Therefore \(\mathbb{Z}\times\mathbb{Z}\) is denumerable, i.e. \(|\mathbb{Z}\times\mathbb{Z}|=|\mathbb{Z}|\).
+
+    Combining the inequalities,
+    \[
+      |\mathbb{Z}|\le|\mathbb{Q}|\le|\mathbb{Z}\times\mathbb{Z}|=|\mathbb{Z}|,
+    \]
+    so \(|\mathbb{Q}|=|\mathbb{Z}|\). Hence \(\mathbb{Q}\) is denumerable.
+  \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+  If \(A\), \(A'\), \(B\), \(B'\) are sets such that \(|A|=|A'|\) and \(|B|=|B'|\), then \(|A\times B|=|A'\times B'|\).
+  If in addition \(A\cap B=\varnothing=A'\cap B'\) then \(|A\cup B|=|A'\cup B'|\).
+  Therefore multiplication and addition of cardinals is well defined.
+\end{exercise}
+
+\begin{solution}
+  Assume \(|A|=|A'|\) and \(|B|=|B'|\).
+  Then there exist bijections \(\alpha:A\to A'\) and \(\beta:B\to B'\).
+
+  \medskip\noindent\textbf{Products.}
+  Define
+  \[
+    \Phi:A\times B\longrightarrow A'\times B',\qquad \Phi(a,b)=(\alpha(a),\beta(b)).
+  \]
+  Then \(\Phi\) is bijective.
+  Indeed, its inverse is
+  \[
+    \Psi:A'\times B'\longrightarrow A\times B,\qquad \Psi(a',b')=(\alpha^{-1}(a'),\beta^{-1}(b')).
+  \]
+  Thus \(|A\times B|=|A'\times B'|\).
+
+  \medskip\noindent\textbf{Unions (disjoint case).}
+  Assume in addition that \(A\cap B=\varnothing\) and \(A'\cap B'=\varnothing\).
+  Define \(F:A\cup B\to A'\cup B'\) by
+  \[
+    F(x)=
+    \begin{cases}
+      \alpha(x),& x\in A,\\
+      \beta(x),& x\in B.
+    \end{cases}
+  \]
+  This is well defined because \(A\cap B=\varnothing\), so each \(x\in A\cup B\) lies in exactly one of the two sets.
+  Similarly, the map
+  \[
+    G:A'\cup B'\to A\cup B,\qquad G(y)=
+    \begin{cases}
+      \alpha^{-1}(y),& y\in A',\\
+      \beta^{-1}(y),& y\in B',
+    \end{cases}
+  \]
+  is well defined because \(A'\cap B'=\varnothing\).
+  One checks immediately that \(G\circ F=\mathrm{id}_{A\cup B}\) and \(F\circ G=\mathrm{id}_{A'\cup B'}\), so \(F\) is a bijection.
+  Hence \(|A\cup B|=|A'\cup B'|\).
+
+  \medskip
+  Therefore, if we define cardinal multiplication by \(|A|\cdot|B|:=|A\times B|\) and cardinal addition (for disjoint sets) by \(|A|+|B|:=|A\cup B|\), these operations depend only on the cardinalities of \(A\) and \(B\), and not on the particular representatives chosen.
+  In other words, addition and multiplication of cardinals are well defined.
+\end{solution}
+
+\begin{exercise}
+  For all cardinal numbers \(\alpha\), \(\beta\), \(\gamma\):
+  \begin{enumerate}[label=(\alph*)]
+    \item \(\alpha+\beta=\beta+\alpha\) and \(\alpha\beta=\beta\alpha\) (commutative laws).
+    \item \((\alpha+\beta)+\gamma=\alpha+(\beta+\gamma)\) and \((\alpha\beta)\gamma=\alpha(\beta\gamma)\) (associative laws).
+    \item \(\alpha(\beta+\gamma)=\alpha\beta+\alpha\gamma\) and \((\alpha+\beta)\gamma=\alpha\gamma+\beta\gamma\) (distributive laws).
+    \item \(\alpha+0=\alpha\) and \(\alpha1=\alpha\).
+    \item If \(\alpha\ne0\), then there is no \(\beta\) such that \(\alpha+\beta=0\) and if \(\alpha\ne1\), then there is no \(\beta\) such that \(\alpha\beta=1\).
+    Therefore subtraction and division of cardinal numbers cannot be defined.
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+  Let \(\alpha,\beta,\gamma\) be cardinals.
+  Choose sets \(A,B,C\) such that \(|A|=\alpha\), \(|B|=\beta\), \(|C|=\gamma\), and assume (replacing by equipollent copies if necessary) that \(A,B,C\) are pairwise disjoint.
+  Recall that \(\alpha+\beta:=|A\cup B|\) (for disjoint representatives) and \(\alpha\beta:=|A\times B|\).
+
+  \begin{enumerate}[label=(\alph*)]
+
+    \item \textbf{Commutativity.}
+    Since \(A\cup B=B\cup A\), we have \(\alpha+\beta=|A\cup B|=|B\cup A|=\beta+\alpha\).
+    Define \(\tau:A\times B\to B\times A\) by \(\tau(a,b)=(b,a)\).
+    Then \(\tau\) is a bijection, so \(|A\times B|=|B\times A|\), i.e. \(\alpha\beta=\beta\alpha\).
+
+    \item \textbf{Associativity.}
+    Because \(A,B,C\) are disjoint,
+    \[
+      (\alpha+\beta)+\gamma = |(A\cup B)\cup C| = |A\cup(B\cup C)| = \alpha+(\beta+\gamma).
+    \]
+    For products, define \(\Phi:(A\times B)\times C \to A\times(B\times C)\) by \(\Phi((a,b),c)=(a,(b,c))\).
+    This is a bijection with inverse \((a,(b,c))\mapsto((a,b),c)\).
+    Hence \((\alpha\beta)\gamma=\alpha(\beta\gamma)\).
+
+    \item \textbf{Distributivity.}
+    Since \(B\) and \(C\) are disjoint, so are \(A\times B\) and \(A\times C\) if we identify them as subsets of \(A\times(B\cup C)\) via the inclusions \(B\hookrightarrow B\cup C\) and \(C\hookrightarrow B\cup C\).
+    Define
+    \[
+      \Phi:A\times(B\cup C)\longrightarrow (A\times B)\cup(A\times C)
+    \]
+    by
+    \[
+      \Phi(a,x)=
+      \begin{cases}
+        (a,x),& x\in B,\\
+        (a,x),& x\in C.
+      \end{cases}
+    \]
+    This is well defined (each \(x\in B\cup C\) lies in exactly one of \(B,C\)) and is clearly bijective, with inverse given by the inclusion of the union into \(A\times(B\cup C)\).
+    Therefore
+    \[
+      |A\times(B\cup C)| = |(A\times B)\cup(A\times C)|,
+    \]
+    i.e. \(\alpha(\beta+\gamma)=\alpha\beta+\alpha\gamma\).
+    The identity \((\alpha+\beta)\gamma=\alpha\gamma+\beta\gamma\) follows similarly by swapping the roles of left and right factors.
+
+    \item \textbf{Identities.}
+    Let \(0=|\varnothing|\) and \(1=|\{*\}|\).
+    If \(A\cap\varnothing=\varnothing\), then \(A\cup\varnothing=A\), so \(\alpha+0=|A|=\alpha\).
+    Also \(A\times\{*\}\cong A\) via \(a\mapsto(a,*)\), so \(\alpha 1=\alpha\).
+
+    \item \textbf{No additive inverses and no multiplicative inverses in general.}
+    If \(\alpha\neq 0\), choose a nonempty set \(A\) with \(|A|=\alpha\).
+    For any set \(B\) disjoint from \(A\), the union \(A\cup B\) is nonempty, hence \(|A\cup B|\neq 0\).
+    Therefore there is no \(\beta\) such that \(\alpha+\beta=0\).
+
+    If \(\alpha\neq 1\), then either \(\alpha=0\) or \(\alpha\ge 2\).
+    In either case, there is no \(\beta\) with \(\alpha\beta=1\).
+    Indeed, if \(\alpha=0\) then \(\alpha\beta=0\) for all \(\beta\).
+    If \(\alpha\ge 2\), let \(A\) be a set of cardinality \(\alpha\), so \(A\) has distinct elements \(a_1\neq a_2\).
+    For any nonempty \(B\), the two subsets \(\{a_1\}\times B\) and \(\{a_2\}\times B\) are disjoint and nonempty, so \(A\times B\) has at least two elements and hence cannot have cardinality \(1\).
+    If \(B=\varnothing\), then \(A\times B=\varnothing\) has cardinality \(0\).
+    Thus \(|A\times B|\neq 1\) for all \(B\), i.e.\ there is no \(\beta\) with \(\alpha\beta=1\).
+
+    Therefore subtraction and division of cardinal numbers cannot be defined so as to make \((\text{Cardinals},+,\cdot)\) into a ring or field in the usual way.
+  \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+  Let \(I_n\) be as in Exercise 1.
+  If \(A\sim I_m\) and \(B\sim I_n\) and \(A\cap B=\varnothing\), then \((A\cup B)\sim I_{m+n}\) and \(A\times B\sim I_{mn}\).
+  Thus if we identify \(|A|\) with \(m\) and \(|B|\) with \(n\), then \(|A|+|B|=m+n\) and \(|A||B|=mn\).
+\end{exercise}
+
+\begin{solution}
+  Let \(A\sim I_m\) and \(B\sim I_n\), and assume \(A\cap B=\varnothing\).
+  Choose bijections
+  \[
+    f:A\longrightarrow I_m,\qquad g:B\longrightarrow I_n.
+  \]
+
+  \medskip\noindent\textbf{Unions.}
+  Define \(h:A\cup B\to I_{m+n}\) by
+  \[
+    h(x)=
+    \begin{cases}
+      f(x),& x\in A,\\
+      m+g(x),& x\in B.
+    \end{cases}
+  \]
+  This is well defined because \(A\cap B=\varnothing\).
+  It is injective:
+  on \(A\) it agrees with the injection \(f\); on \(B\) it agrees with the injection \(x\mapsto m+g(x)\); and no value coming from \(A\) (which lies in \(\{1,\dots,m\}\)) can equal a value coming from \(B\) (which lies in \(\{m+1,\dots,m+n\}\)).
+  It is surjective because every \(t\in I_{m+n}\) satisfies either \(1\le t\le m\), in which case \(t=f(a)\) for \(a=f^{-1}(t)\in A\), or \(m+1\le t\le m+n\), in which case \(t=m+g(b)\) for \(b=g^{-1}(t-m)\in B\).
+  Hence \(h\) is a bijection and \((A\cup B)\sim I_{m+n}\).
+
+  \medskip\noindent\textbf{Products.}
+  Define \(\Phi:A\times B\to I_{mn}\) by
+  \[
+    \Phi(a,b)=(f(a)-1)\,n+g(b).
+  \]
+  Since \(1\le f(a)\le m\) and \(1\le g(b)\le n\), we have \(0\le (f(a)-1)n \le (m-1)n\), so \(\Phi(a,b)\in\{1,2,\dots,mn\}=I_{mn}\).
+
+  To see that \(\Phi\) is injective, suppose \(\Phi(a,b)=\Phi(a',b')\). Then
+  \[
+    (f(a)-1)n+g(b)=(f(a')-1)n+g(b'),
+  \]
+  so
+  \[
+    (f(a)-f(a'))n=g(b')-g(b).
+  \]
+  The right-hand side lies in \(\{-(n-1),\dots,n-1\}\), while the left-hand side is a multiple of \(n\).
+  Hence both sides must be \(0\), so \(f(a)=f(a')\) and \(g(b)=g(b')\), and therefore \(a=a'\) and \(b=b'\).
+
+  For surjectivity, let \(t\in I_{mn}\).
+  By the division algorithm there exist unique integers \(q,r\) with
+  \[
+    t-1=qn+r,\qquad 0\le r\le n-1,\qquad 0\le q\le m-1.
+  \]
+  Set \(i=q+1\in I_m\) and \(j=r+1\in I_n\).
+  Choose \(a\in A\) with \(f(a)=i\) and \(b\in B\) with \(g(b)=j\).
+  Then
+  \[
+    \Phi(a,b)=(i-1)n+j=qn+(r+1)=t.
+  \]
+  Thus \(\Phi\) is surjective, hence bijective, and \(A\times B\sim I_{mn}\).
+
+  \medskip
+  Therefore, identifying \(|A|\) with \(m\) and \(|B|\) with \(n\), we obtain
+  \[
+    |A|+|B|=m+n,\qquad |A|\,|B|=mn,
+  \]
+  i.e.\ cardinal addition and multiplication agree with the usual addition and multiplication on finite cardinalities.
+\end{solution}
+
+\begin{exercise}
+  If \(A\sim A'\), \(B\sim B'\) and \(f:A\to B\) is injective, then there is an injective map \(A'\to B'\).
+  Therefore the relation \(\le\) on cardinal numbers is well defined.
+\end{exercise}
+
+\begin{solution}
+  Assume \(A\sim A'\) and \(B\sim B'\), and let \(f:A\to B\) be injective.
+  Choose bijections \(\alpha:A'\to A\) and \(\beta:B\to B'\).
+  Define
+  \[
+    f' = \beta\circ f\circ \alpha \;:\; A' \longrightarrow B'.
+  \]
+  Then \(f'\) is injective, since it is a composition of injective maps (\(\alpha\) and \(\beta\) are bijections, hence injective, and \(f\) is injective).
+  Thus there exists an injection \(A'\to B'\), as required.
+
+  \medskip
+  Consequently, if we define \(|A|\le |B|\) to mean that there exists an injective map \(A\to B\), then this relation depends only on the cardinalities of \(A\) and \(B\), and not on the particular representatives chosen.
+  Hence \(\le\) on cardinal numbers is well defined.
+\end{solution}
+
+\begin{exercise}
+  An infinite subset of a denumerable set is denumerable.
+\end{exercise}
+
+\begin{solution}
+  Let \(S\) be denumerable and let \(T\subset S\) be an infinite subset.
+  Choose a bijection \(f:\mathbb{N}\to S\).
+  Consider the set of indices
+  \[
+    J = f^{-1}(T)=\{\,n\in\mathbb{N} : f(n)\in T\,\}\subset \mathbb{N}.
+  \]
+  Since \(T\) is infinite and \(f\) is bijective, \(J\) is infinite.
+
+  We now enumerate \(J\) in increasing order.
+  Define \(j_0=\min J\), and having defined \(j_0<\cdots<j_k\), set
+  \[
+  j_{k+1}=\min\bigl(J-\{j_0,\dots,j_k\}\bigr).
+  \]
+  This is well defined because \(J\) is infinite, so after removing finitely many elements it is still nonempty, and \(\mathbb{N}\) is well ordered.
+
+  Define \(g:\mathbb{N}\to T\) by \(g(k)=f(j_k)\).
+  Then \(g(k)\in T\) for all \(k\), and \(g\) is injective since the \(j_k\) are distinct and \(f\) is injective.
+  Moreover \(g\) is surjective onto \(T\):
+  if \(t\in T\), then \(t=f(n)\) for a unique \(n\in\mathbb{N}\), and \(n\in J\).
+  Since \((j_k)\) lists all elements of \(J\), we have \(n=j_k\) for some \(k\), hence \(t=f(n)=f(j_k)=g(k)\).
+
+  Thus \(g\) is a bijection \(\mathbb{N}\to T\), so \(T\) is denumerable.
+\end{solution}
+
+\begin{exercise}
+  The infinite set of real numbers \(\mathbb{R}\) is not denumerable (that is, \(\aleph_0<|\mathbb{R}|\)).
+  [Hint: it suffices to show that the open interval \((0, 1)\) is not denumerable by Exercise 8.
+  You may assume each real number can be written as an infinite decimal.
+  If \((0,1)\) is denumerable there is a bijection \(f:\mathbf{N}^*\to(0, 1)\).
+  Construct an infinite decimal (real number) \(.a_1a_2\dots\) in \((0,1)\) such that \(a_n\) is not the \(n\)th digit in the decimal expansion of \(f(n)\).
+  This number cannot be in \(\operatorname{Im}f\).]
+\end{exercise}
+
+\begin{solution}
+  We prove that \((0,1)\) is not denumerable.
+  Since \((0,1)\subset\mathbb{R}\), this implies \(|\mathbb{R}|>\aleph_0\).
+  (Equivalently, if \(\mathbb{R}\) were denumerable then its infinite subset \((0,1)\) would be denumerable, contrary to what we prove below.)
+
+  Assume for contradiction that \((0,1)\) is denumerable.
+  Then there exists a bijection \(f:\mathbf{N}^*\to (0,1)\). For each \(n\in\mathbf{N}^*\), write the decimal expansion of \(f(n)\) as
+  \[
+    f(n)=0.d_{n1}d_{n2}d_{n3}\cdots,
+  \]
+  where each \(d_{nk}\in\{0,1,\dots,9\}\).
+  We may (and do) choose the expansion so that it does \emph{not} end in an infinite string of \(9\)'s; this makes the decimal representation unique.
+
+  Now define a new decimal
+  \[
+    x=0.a_1a_2a_3\cdots
+  \]
+  by the rule
+  \[
+    a_n=
+    \begin{cases}
+      1,& d_{nn}\neq 1,\\
+      2,& d_{nn}=1.
+    \end{cases}
+  \]
+  Then each \(a_n\in\{1,2\}\), so \(x\in(0,1)\).
+  Moreover, for every \(n\) we have \(a_n\neq d_{nn}\) by construction.
+  Hence \(x\neq f(n)\) for every \(n\), since \(x\) and \(f(n)\) differ in the \(n\)-th decimal digit.
+  Therefore \(x\notin\operatorname{Im}(f)\), contradicting surjectivity of \(f\).
+
+  Thus no bijection \(\mathbf{N}^*\to(0,1)\) exists, so \((0,1)\) is not denumerable.
+  Consequently \(\mathbb{R}\) is not denumerable, i.e.\ \(\aleph_0<|\mathbb{R}|\).
+\end{solution}
+
+\begin{exercise}
+  If \(\alpha\),\(\beta\) are cardinals, define \(\alpha^\beta\) to be the cardinal number of the set of all functions \(B\to A\), where \(A\), \(B\) are sets such that \(|A|=\alpha\), \(|B|=\beta\).
+  \begin{enumerate}[label=(\alph*)]
+    \item \(\alpha^\beta\) is independent of the choice of \(A\), \(B\).
+    \item \(\alpha^{\beta+\gamma}=(\alpha^{\beta})(\alpha^{\gamma})\); \((\alpha\beta)^\gamma=(\alpha^\gamma)(\beta^\gamma)\); \(\alpha^{\beta\gamma}=(\alpha^\beta)^\gamma\).
+    \item If \(\alpha\le\beta\), then \(\alpha^\gamma\le\beta^\gamma\).
+    \item If \(\alpha\), \(\beta\) are finite with \(\alpha>1\), \(\beta>1\) and \(\gamma\) is infinite, then \(\alpha^\gamma=\beta^\gamma\).
+    \item For every finite cardinal \(n\), \(\alpha^n=\alpha\alpha\dotsb\alpha\) (\(n\) factors).
+    Hence \(\alpha^n=\alpha\) if \(\alpha\) is infinite.
+    \item If \(P(A)\) is the power set of a set \(A\), then \(|P(A)|=2^{|A|}\).
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+  Let \(|A|=\alpha\) and \(|B|=\beta\).
+  Write \(A^B\) for the set of all functions \(B\to A\); by definition \(\alpha^\beta=|A^B|\).
+
+  \begin{enumerate}[label=(\alph*)]
+
+    \item \textbf{\(\alpha^\beta\) is well defined.}
+    Suppose \(A,A',B,B'\) satisfy \(|A|=|A'|=\alpha\) and \(|B|=|B'|=\beta\).
+    Choose bijections \(\varphi:A\to A'\) and \(\psi:B'\to B\).
+    Define
+    \[
+      T:A^B\longrightarrow (A')^{B'},\qquad T(f)=\varphi\circ f\circ \psi.
+    \]
+    Then \(T\) is a bijection, with inverse \(g\mapsto \varphi^{-1}\circ g\circ \psi^{-1}\).
+    Hence \(|A^B|=|(A')^{B'}|\), so \(\alpha^\beta\) is independent of the choices of \(A,B\).
+
+    \item \textbf{Exponent laws.}
+    Let \(|A|=\alpha\), \(|B|=\beta\), \(|C|=\gamma\), and take \(B\cap C=\varnothing\).
+
+    \emph{(i) } \(\alpha^{\beta+\gamma}=\alpha^\beta\,\alpha^\gamma\).
+    A function \(h:B\cup C\to A\) is uniquely determined by its restrictions \(h|_B:B\to A\) and \(h|_C:C\to A\).
+    Conversely, any pair \((f,g)\in A^B\times A^C\) determines a unique \(h\in A^{B\cup C}\) by \(h|_B=f\), \(h|_C=g\).
+    Thus the map
+    \[
+      A^{B\cup C}\longrightarrow A^B\times A^C,\qquad h\mapsto (h|_B,h|_C)
+    \]
+    is a bijection, so \(|A^{B\cup C}|=|A^B\times A^C|\), i.e. \(\alpha^{\beta+\gamma}=(\alpha^\beta)(\alpha^\gamma)\).
+
+    \emph{(ii) }\((\alpha\beta)^\gamma=(\alpha^\gamma)(\beta^\gamma)\).
+    A function \(u:C\to A\times B\) is equivalent to an ordered pair of functions \((f,g)\) with \(f:C\to A\) and \(g:C\to B\), via \(u(c)=(f(c),g(c))\).
+    Hence
+    \[
+      (A\times B)^C \sim A^C\times B^C,
+    \]
+    so \(|(A\times B)^C|=|A^C\times B^C|\), i.e. \((\alpha\beta)^\gamma=(\alpha^\gamma)(\beta^\gamma)\).
+
+    \emph{(iii) }\(\alpha^{\beta\gamma}=(\alpha^\beta)^\gamma\).
+    Identify \(B\times C\) as the domain.
+    A function \(F:B\times C\to A\) is equivalent to a function \(\widetilde{F}:C\to A^B\) given by
+    \[
+      \widetilde{F}(c)(b)=F(b,c).
+    \]
+    This correspondence is bijective (currying/uncurrying), so
+    \[
+      A^{B\times C}\sim (A^B)^C,
+    \]
+    hence \(\alpha^{\beta\gamma}=(\alpha^\beta)^\gamma\).
+
+    \item \textbf{Monotonicity in the base.}
+    Assume \(\alpha\le \beta\).
+    Choose sets \(A,B\) with \(|A|=\alpha\), \(|B|=\beta\), and an injection \(i:A\hookrightarrow B\).
+    For any set \(C\) with \(|C|=\gamma\), define
+    \[
+      I:A^C\longrightarrow B^C,\qquad I(f)=i\circ f.
+    \]
+    If \(I(f)=I(g)\), then \(i\circ f=i\circ g\), and since \(i\) is injective we have \(f=g\).
+    Thus \(I\) is injective, so \(|A^C|\le |B^C|\), i.e. \(\alpha^\gamma\le \beta^\gamma\).
+
+    \item \textbf{If \(\alpha,\beta\) are finite \(>1\) and \(\gamma\) is infinite, then \(\alpha^\gamma=\beta^\gamma\).}
+
+    Let \(\gamma=|C|\) with \(C\) infinite.
+    Since \(\alpha>1\), there exists an injection \(\{0,1\}\hookrightarrow A\), hence \(2^\gamma\le \alpha^\gamma\) by (c).
+    Also \(A\) is finite, so there is an injection \(A\hookrightarrow \{0,1\}^k\) for some \(k\in\mathbb{N}\) (e.g. take \(k\) with \(2^k\ge \alpha\)).
+    Then by (c)
+    \[
+      \alpha^\gamma \le (2^k)^\gamma.
+    \]
+    Using (b)(iii) and (b)(v) below, \((2^k)^\gamma = 2^{k\gamma}\).
+    Since \(C\) is infinite and \(k\ge1\) is finite, \(k\gamma=\gamma\) (there is a bijection \(C\times I_k\cong C\)), hence \((2^k)^\gamma=2^\gamma\).
+    Therefore \(2^\gamma\le \alpha^\gamma\le 2^\gamma\), so \(\alpha^\gamma=2^\gamma\).
+    The same argument gives \(\beta^\gamma=2^\gamma\), hence \(\alpha^\gamma=\beta^\gamma\).
+
+    \item \textbf{Finite exponents.}
+    Let \(n\) be a finite cardinal and choose \(I_n=\{1,\dots,n\}\).
+    A function \(I_n\to A\) is the same as an \(n\)-tuple \((a_1,\dots,a_n)\in A^n\).
+    Thus
+    \[
+      A^{I_n}\cong \underbrace{A\times\cdots\times A}_{n\ \text{factors}},
+    \]
+    so \(\alpha^n=\alpha\cdot\alpha\cdots\alpha\) (\(n\) factors).
+
+    In particular, if \(\alpha\) is infinite and \(n\ge1\) is finite, then \(\alpha^n=\alpha\).
+    (This uses the earlier result that \(\alpha n=\alpha\) for infinite \(\alpha\) and finite \(n\ge1\), proved by exhibiting a bijection \(A\times I_n\sim A\) when \(A\) is infinite.)
+
+    \item \textbf{Power sets.}
+    Let \(P(A)\) denote the power set of \(A\).
+    Identify a subset \(S\subset A\) with its characteristic function \(\chi_S:A\to\{0,1\}\), where \(\chi_S(a)=1\) if \(a\in S\) and \(\chi_S(a)=0\) otherwise.
+    The map
+    \[
+      P(A)\longrightarrow \{0,1\}^A,\qquad S\mapsto \chi_S
+    \]
+    is a bijection, with inverse \(f\mapsto f^{-1}(\{1\})\).
+    Hence \(|P(A)|=|\{0,1\}^A|=2^{|A|}\).
+  \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+  If \(I\) is an infinite set, and for each \(i \in I\) \(A_i\) is a finite set, then \(|\bigcup_{i \in I} A_i| \le |I|\).
+\end{exercise}
+
+\begin{solution}
+  Let \(I\) be infinite and suppose each \(A_i\) is finite.
+  For each \(i\in I\), choose a bijection \(f_i:A_i\to I_{n_i}\) for some \(n_i\in\mathbb{N}\).
+  Since \(A_i\) is finite, there exists an injection \(A_i\hookrightarrow\mathbb{N}\) (for instance, compose \(f_i\) with the inclusion  \(I_{n_i}\hookrightarrow\mathbb{N}\)).
+  Fix such an injection and denote it by \(\phi_i:A_i\hookrightarrow\mathbb{N}\).
+
+  Define a map
+  \[
+    F:\bigcup_{i\in I}A_i \longrightarrow I\times\mathbb{N}
+  \]
+  by
+  \[
+    F(x)=(i,\phi_i(x)) \quad \text{where \(i\) is any index with } x\in A_i.
+  \]
+  To make \(F\) well defined, replace \(\bigcup_{i\in I}A_i\) by the disjoint union
+  \[
+    \bigsqcup_{i\in I}A_i=\{(i,x): i\in I,\ x\in A_i\},
+  \]
+  which is equipollent to \(\bigcup_{i\in I}A_i\) via \((i,x)\mapsto x\).
+  On the disjoint union define
+  \[
+    \widetilde{F}:\bigsqcup_{i\in I}A_i \longrightarrow I\times\mathbb{N},\qquad \widetilde{F}(i,x)=(i,\phi_i(x)).
+  \]
+  This map is injective:
+  if \(\widetilde{F}(i,x)=\widetilde{F}(j,y)\), then \((i,\phi_i(x))=(j,\phi_j(y))\), hence \(i=j\) and \(\phi_i(x)=\phi_i(y)\).
+  Since \(\phi_i\) is injective, \(x=y\).
+  Thus \((i,x)=(j,y)\).
+
+  Therefore
+  \[
+    \left|\bigsqcup_{i\in I}A_i\right| \le |I\times\mathbb{N}|.
+  \]
+  Because \(I\) is infinite, we have \(|I\times\mathbb{N}|=|I|\) (since \(|\mathbb{N}|=\aleph_0\le |I|\) and for infinite cardinals \(\kappa\), \(\kappa\cdot\aleph_0=\kappa\)).
+  Hence
+  \[
+    \left|\bigsqcup_{i\in I}A_i\right|\le |I|.
+  \]
+  Finally, the canonical surjection \(\bigsqcup_{i\in I}A_i\to \bigcup_{i\in I}A_i\), \((i,x)\mapsto x\), shows \(\left|\bigcup_{i\in I}A_i\right|\le \left|\bigsqcup_{i\in I}A_i\right|\).
+  Combining, we obtain
+  \[
+    \left|\bigcup_{i\in I}A_i\right| \le |I|.
+  \]
+\end{solution}
+
+\begin{exercise}
+  Let \(\alpha\) be a fixed cardinal number and suppose that for every \(i \in I\), \(A_i\) is a set with \(|A_i| = \alpha\).
+  Then \(|\bigcup_{i \in I} A_i| \le |I| \alpha\).
+\end{exercise}
+
+\begin{solution}
+  Let \(I\) be an index set and suppose \(|A_i|=\alpha\) for all \(i\in I\).
+  Choose a set \(A\) with \(|A|=\alpha\).
+  For each \(i\in I\), choose a bijection \(\varphi_i:A_i\to A\).
+
+  Consider the disjoint union
+  \[
+    \bigsqcup_{i\in I}A_i=\{(i,x): i\in I,\ x\in A_i\}.
+  \]
+  Define
+  \[
+    F:\bigsqcup_{i\in I}A_i \longrightarrow I\times A,\qquad F(i,x)=(i,\varphi_i(x)).
+  \]
+  Then \(F\) is injective:
+  if \(F(i,x)=F(j,y)\), then \((i,\varphi_i(x))=(j,\varphi_j(y))\), hence \(i=j\) and \(\varphi_i(x)=\varphi_i(y)\), and since \(\varphi_i\) is injective, \(x=y\).
+  Thus \((i,x)=(j,y)\).
+
+  Therefore
+  \[
+    \left|\bigsqcup_{i\in I}A_i\right| \le |I\times A| = |I|\,|A| = |I|\,\alpha.
+  \]
+  Finally, the canonical map \(\bigsqcup_{i\in I}A_i\to \bigcup_{i\in I}A_i\), \((i,x)\mapsto x\), is surjective, so
+  \[
+    \left|\bigcup_{i\in I}A_i\right| \le \left|\bigsqcup_{i\in I}A_i\right|.
+  \]
+  Combining these inequalities gives
+  \[
+    \left|\bigcup_{i\in I}A_i\right|\le |I|\,\alpha,
+  \]
+  as required.
+\end{solution}
