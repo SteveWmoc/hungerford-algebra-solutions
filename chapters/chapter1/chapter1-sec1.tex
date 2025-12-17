@@ -1,0 +1,724 @@
+\section{Semigroups, Monoids, and Groups}
+
+\setcounter{exercise}{0}
+
+\begin{exercise}
+  Give examples other than those in the text of semigroups and monoids that are not groups.
+\end{exercise}
+
+\begin{solution}
+  We give several standard examples, emphasizing which group axiom fails in each case.
+
+  \medskip\noindent\textbf{Semigroups that are not monoids.}
+  \begin{itemize}
+    \item \emph{Positive integers under addition.}
+    The set \(\mathbf{N}^*=\{1,2,3,\dots\}\) with the operation \(+\) is a semigroup:
+    addition is associative.
+    It is not a monoid, since there is no identity element in \(\mathbf{N}^*\) for addition.
+
+    \item \emph{Nonempty strings under concatenation.}
+    Let \(\Sigma\) be a nonempty alphabet and let \(\Sigma^+\) be the set of all nonempty finite strings over \(\Sigma\).
+    Concatenation of strings is associative, so \(\Sigma^+\) is a semigroup.
+    It is not a monoid because the empty string (the identity for concatenation) is not included.
+  \end{itemize}
+
+  \medskip\noindent\textbf{Monoids that are not groups.}
+  \begin{itemize}
+    \item \emph{Natural numbers under addition.}
+    The set \(\mathbb{N}=\{0,1,2,\dots\}\) with addition is a monoid:
+    addition is associative and \(0\) is an identity.
+    It is not a group because no element \(n\ge1\) has an additive inverse in \(\mathbb{N}\).
+
+    \item \emph{Nonzero natural numbers under multiplication.}
+    The set \(\mathbf{N}^*=\{1,2,3,\dots\}\) with multiplication is a monoid, with identity \(1\). It is not a group because, for example, \(2\) has no multiplicative inverse in \(\mathbf{N}^*\).
+
+    \item \emph{Endomorphisms of a set under composition.}
+    Let \(X\) be a set with at least two elements, and let \(\operatorname{End}(X)\) be the set of all functions \(X\to X\).
+    Under composition, this is a monoid:
+    composition is associative and the identity map is the identity element.
+    It is not a group, since non-bijective functions (for example, constant maps) have no inverse.
+  \end{itemize}
+
+  In each of these examples, the failure to be a group is due to the absence of inverses, even though associativity (and, for monoids, an identity element) is present.
+\end{solution}
+
+\begin{exercise}
+  Let \(G\) be a group (written additively), \(S\) a nonempty set, and \(M(S,G)\) the set of all functions \(f:S\to G\).
+  Define addition in \(M(S,G)\) as follows:
+  \((f+g):S\to G\) is given by \(s\mapsto f(s)+g(s)\in G\).
+  Prove that \(M(S,G)\) is a group, which is abelian if \(G\) is.
+\end{exercise}
+
+\begin{solution}
+  Let \(G\) be a group written additively and let \(S\neq\varnothing\).
+  Set \(M(S,G)=\{f:S\to G\}\), and define addition pointwise by
+  \[
+    (f+g)(s)=f(s)+g(s)\qquad(s\in S).
+  \]
+  We verify the group axioms.
+
+  \medskip\noindent\textbf{Closure.}
+  If \(f,g\in M(S,G)\), then for each \(s\in S\) the value \(f(s)+g(s)\in G\), so \(f+g:S\to G\) is a function into \(G\).
+  Hence \(f+g\in M(S,G)\).
+
+  \medskip\noindent\textbf{Associativity.}
+  For \(f,g,h\in M(S,G)\) and \(s\in S\),
+  \[
+    \bigl((f+g)+h\bigr)(s)=(f+g)(s)+h(s)=(f(s)+g(s))+h(s)=f(s)+(g(s)+h(s))=f(s)+(g+h)(s)=\bigl(f+(g+h)\bigr)(s),
+  \]
+  using associativity in \(G\).
+  Since the two functions agree at every \(s\), \((f+g)+h=f+(g+h)\).
+
+  \medskip\noindent\textbf{Identity element.}
+  Let \(0_G\) be the identity of \(G\), and define \(0:S\to G\) by \(0(s)=0_G\) for all \(s\in S\) (the zero function).
+  Then for any \(f\in M(S,G)\) and \(s\in S\),
+  \[
+    (f+0)(s)=f(s)+0_G=f(s),\qquad (0+f)(s)=0_G+f(s)=f(s).
+  \]
+  Hence \(0\) is an identity element in \(M(S,G)\).
+
+  \medskip\noindent\textbf{Inverses.}
+  Given \(f\in M(S,G)\), define \(-f:S\to G\) by \((-f)(s)=-f(s)\), where \(-f(s)\) denotes the inverse of \(f(s)\) in \(G\).
+  Then for each \(s\in S\),
+  \[
+    (f+(-f))(s)=f(s)+(-f(s))=0_G,
+  \]
+  so \(f+(-f)=0\).
+  Similarly \((-f)+f=0\).
+  Thus every \(f\) has an inverse.
+
+  Therefore \(M(S,G)\) is a group under pointwise addition.
+
+  \medskip\noindent\textbf{Commutativity.}
+  If \(G\) is abelian, then for \(f,g\in M(S,G)\) and all \(s\in S\),
+  \[
+    (f+g)(s)=f(s)+g(s)=g(s)+f(s)=(g+f)(s),
+  \]
+  so \(f+g=g+f\).
+  Hence \(M(S,G)\) is abelian whenever \(G\) is abelian.
+\end{solution}
+
+\begin{exercise}
+  Is it true that a semigroup which has a \emph{left} identity element and in which every element has a \emph{right} inverse (see Proposition 1.3) is a group?
+\end{exercise}
+
+\begin{solution}
+  No.
+  Let \(S\) be any set with at least two elements, and define a binary operation on \(S\) by
+  \[
+    x\ast y = y\qquad (x,y\in S).
+  \]
+  (This is the \emph{right-zero semigroup}.)
+
+  \textbf{Semigroup:} The operation is associative, since
+  \[
+    (x\ast y)\ast z = y\ast z = z = x\ast z = x\ast (y\ast z)
+  \]
+  for all \(x,y,z\in S\).
+
+  \textbf{Left identity:} Fix any element \(e\in S\).
+  Then for every \(x\in S\),
+  \[
+    e\ast x = x,
+  \]
+  so \(e\) is a left identity.
+
+  \textbf{Right inverses:} For any \(a\in S\), take \(b=e\).
+  Then
+  \[
+    a\ast b = a\ast e = e,
+  \]
+  so every element has a right inverse (with respect to the left identity \(e\)).
+
+  \textbf{Not a group:} \(e\) is not a two-sided identity unless \(S\) is a singleton.
+  Indeed, for \(x\neq e\),
+  \[
+    x\ast e = e \neq x.
+  \]
+  Hence \(S\) is not a monoid (with identity), and therefore cannot be a group.
+
+  Thus a semigroup can have a left identity and right inverses for all elements without being a group.
+\end{solution}
+
+\begin{exercise}
+  Write out a multiplication table for the group \(D_4^{\phantom{4}*}\).
+\end{exercise}
+
+\begin{solution}
+  \[
+    \begin{array}{c|cccccccc}
+      \cdot & e & r & r^2 & r^3 & s & sr & sr^2 & sr^3 \\ \hline
+      e     & e & r & r^2 & r^3 & s & sr & sr^2 & sr^3 \\
+      r     & r & r^2 & r^3 & e & sr^3 & s & sr & sr^2 \\
+      r^2   & r^2 & r^3 & e & r & sr^2 & sr^3 & s & sr \\
+      r^3   & r^3 & e & r & r^2 & sr & sr^2 & sr^3 & s \\
+      s     & s & sr & sr^2 & sr^3 & e & r & r^2 & r^3 \\
+      sr    & sr & sr^2 & sr^3 & s & r^3 & e & r & r^2 \\
+      sr^2  & sr^2 & sr^3 & s & sr & r^2 & r^3 & e & r \\
+      sr^3  & sr^3 & s & sr & sr^2 & r & r^2 & r^3 & e
+    \end{array}
+  \]
+\end{solution}
+
+\begin{exercise}
+  Prove that the symmetric group on \(n\) letters, \(S_n\), has order \(n!\).
+\end{exercise}
+
+\begin{solution}
+  Let \(S_n\) denote the symmetric group on \(n\) letters, i.e.\ the set of all bijections \(\{1,2,\dots,n\}\to\{1,2,\dots,n\}\).
+  Thus \(|S_n|\) is the number of permutations of an \(n\)-element set.
+
+  A permutation \(\sigma\in S_n\) is determined by the ordered list \((\sigma(1),\sigma(2),\dots,\sigma(n))\), where these values must be distinct and each lies in \(\{1,\dots,n\}\).
+  We count the number of such lists.
+
+  There are \(n\) choices for \(\sigma(1)\).
+  After choosing \(\sigma(1)\), there remain \(n-1\) choices for \(\sigma(2)\), since \(\sigma(2)\neq\sigma(1)\).
+  Continuing, after choosing \(\sigma(1),\dots,\sigma(k-1)\), there are \(n-(k-1)\) choices for \(\sigma(k)\).
+  Therefore the total number of permutations is
+  \[
+    n\cdot (n-1)\cdot (n-2)\cdots 2\cdot 1 = n!.
+  \]
+  Hence \(|S_n|=n!\).
+\end{solution}
+
+\begin{exercise}
+  Write out an addition table for \(Z_2\oplus Z_2\). 
+  \(Z_2\oplus Z_2\) is called the \textbf{Klein four group}.
+\end{exercise}
+
+\begin{solution}
+  Recall that \(Z_2=\{0,1\}\) with addition mod \(2\).
+  Thus
+  \[
+    Z_2\oplus Z_2=\{(0,0),(1,0),(0,1),(1,1)\},
+  \]
+  with addition defined componentwise modulo \(2\).
+
+  The addition table is:
+
+  \[
+    \begin{array}{c|cccc}
+      + & (0,0) & (1,0) & (0,1) & (1,1) \\ \hline
+      (0,0) & (0,0) & (1,0) & (0,1) & (1,1) \\
+      (1,0) & (1,0) & (0,0) & (1,1) & (0,1) \\
+      (0,1) & (0,1) & (1,1) & (0,0) & (1,0) \\
+      (1,1) & (1,1) & (0,1) & (1,0) & (0,0)
+    \end{array}
+  \]
+
+  From the table we see that:
+  \begin{itemize}
+    \item \((0,0)\) is the identity element.
+    \item Every non-identity element has order \(2\).
+    \item The operation is commutative.
+  \end{itemize}
+
+  Hence \(Z_2\oplus Z_2\), the Klein four group, is an abelian group in which every non-identity element is its own inverse.
+\end{solution}
+
+\begin{exercise}
+  If \(p\) is prime, then the nonzero elements of \(Z_p\) form a group of order \(p-1\) under multiplication.
+  [Hint: \(\overline{a}\ne\overline{0}\implies(a,p)=1\); use Introduction, Theorem 6.5.]
+  Show that this statement is false if \(p\) is not prime.
+\end{exercise}
+
+\begin{solution}
+  Let \(p\) be prime.
+  Consider the set \(Z_p^\times=Z_p-\{\overline{0}\}\) of nonzero residue classes modulo \(p\), with multiplication modulo \(p\).
+
+  \medskip\noindent\textbf{Claim.}
+  If \(p\) is prime, then \(Z_p^\times\) is a group under multiplication and \(|Z_p^\times|=p-1\).
+
+  \begin{proof}
+    Closure and associativity are inherited from integer multiplication modulo \(p\), and the identity element is \(\overline{1}\).
+    It remains to show that every \(\overline{a}\in Z_p^\times\) has a multiplicative inverse in \(Z_p^\times\).
+
+    If \(\overline{a}\neq \overline{0}\), then \(p\nmid a\), hence \(\gcd(a,p)=1\) because \(p\) is prime.
+    By Introduction, Theorem 6.5 (Bézout's identity), there exist integers \(x,y\) such that
+    \[
+      ax+py=1.
+    \]
+    Reducing this congruence modulo \(p\) gives \(ax\equiv 1 \pmod p\), hence \(\overline{a}\,\overline{x}=\overline{1}\) in \(Z_p\).
+    Thus \(\overline{x}\) is the inverse of \(\overline{a}\), and \(\overline{x}\neq\overline{0}\).
+    Therefore.every element of \(Z_p^\times\) has an inverse, so \(Z_p^\times\) is a group.
+
+    Finally, \(Z_p\) has \(p\) elements, and removing \(\overline{0}\) leaves \(p-1\) elements, so \(|Z_p^\times|=p-1\).
+  \end{proof}
+
+  \medskip\noindent\textbf{The statement is false when \(p\) is not prime.}
+  Let \(n\ge2\) be composite.
+  Then there exist integers \(a,b\) with \(1<a<n\), \(1<b<n\), and \(n=ab\).
+  In \(Z_n\) we have
+  \[
+    \overline{a}\neq \overline{0},\qquad \overline{b}\neq \overline{0}, \qquad\text{but}\qquad \overline{a}\,\overline{b}=\overline{ab}=\overline{n}=\overline{0}.
+  \]
+  Thus \(Z_n-\{\overline{0}\}\) contains nonzero elements whose product is \(\overline{0}\).
+  In particular, it is not closed under multiplication, so it cannot be a group.
+
+  For a concrete example, take \(n=4\):
+  \(\overline{2}\neq\overline{0}\) in \(Z_4\), but \(\overline{2}\cdot\overline{2} =\overline{4}=\overline{0}\).
+  Hence the nonzero elements of \(Z_4\) do not form a group under multiplication.
+\end{solution}
+
+\begin{exercise}
+  \begin{enumerate}[label=(\alph*)]
+    \item The relation given by \(a\sim b\iff a-b\in\mathbb{Z}\) is a congruence relation on the additive group \(\mathbb{Q}\) [see Theorem 1.5]. \item The set \(\mathbb{Q}/\mathbb{Z}\) of equivalence classes is an infinite abelian group.
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item \textbf{\(\sim\) is a congruence relation on \((\mathbb{Q},+)\).}
+
+    First note that \(\sim\) is an equivalence relation:
+
+    \begin{itemize}
+      \item Reflexive: \(a-a=0\in\mathbb{Z}\), so \(a\sim a\).
+      \item Symmetric: if \(a\sim b\) then \(a-b\in\mathbb{Z}\), hence \(b-a=-(a-b)\in\mathbb{Z}\), so \(b\sim a\).
+      \item Transitive: if \(a\sim b\) and \(b\sim c\), then \(a-b\in\mathbb{Z}\) and \(b-c\in\mathbb{Z}\), so \((a-c)=(a-b)+(b-c)\in\mathbb{Z}\), hence \(a\sim c\).
+    \end{itemize}
+
+    To check that it is a congruence relation (compatible with the group operation), let \(a\sim b\) and \(c\sim d\).
+    Then \(a-b\in\mathbb{Z}\) and \(c-d\in\mathbb{Z}\), so
+    \[
+      (a+c)-(b+d)=(a-b)+(c-d)\in\mathbb{Z},
+    \]
+    which shows \(a+c\sim b+d\).
+    Thus \(\sim\) is a congruence relation on the additive group \(\mathbb{Q}\) (in the sense of Theorem~1.5).
+
+    \item \textbf{\(\mathbb{Q}/\mathbb{Z}\) is an infinite abelian group.}
+
+    Since \(\sim\) is a congruence relation on the abelian group \((\mathbb{Q},+)\), Theorem~1.5 implies that the set of equivalence classes \(\mathbb{Q}/\mathbb{Z}\) becomes a group under
+    \[
+      [a]+[b]=[a+b],
+    \]
+    where \([a]\) denotes the \(\sim\)-equivalence class of \(a\).
+    This operation is well defined by part (a), the identity element is \([0]\), and the inverse of \([a]\) is \([-a]\).
+    Moreover, because \(\mathbb{Q}\) is abelian, \(\mathbb{Q}/\mathbb{Z}\) is abelian.
+
+    It remains to show that \(\mathbb{Q}/\mathbb{Z}\) is infinite.
+    Consider the elements
+    \[
+      \left[\frac{1}{n}\right]\in \mathbb{Q}/\mathbb{Z}\qquad(n\ge 2).
+    \]
+    If \(\left[\frac{1}{m}\right]=\left[\frac{1}{n}\right]\), then \(\frac{1}{m}-\frac{1}{n}\in\mathbb{Z}\).
+    But for \(m,n\ge2\) we have
+    \[
+      -\frac12 < \frac{1}{m}-\frac{1}{n} < \frac12,
+    \]
+    so the only integer it can equal is \(0\).
+    Hence \(\frac{1}{m}=\frac{1}{n}\), so \(m=n\).
+    Thus the elements \(\left[\frac{1}{n}\right]\) are all distinct, giving infinitely many distinct elements of \(\mathbb{Q}/\mathbb{Z}\).
+
+    Therefore \(\mathbb{Q}/\mathbb{Z}\) is an infinite abelian group.
+  \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+  Let \(p\) be a fixed prime.
+  Let \(R_p\) be the set of all those rational numbers whose denominator is relatively prime to \(p\).
+  Let \(R^p\) be the set of rationals whose denominator is a power of \(p\) (\(p^i, i \ge 0\)).
+  Prove that both \(R_p\) and \(R^p\) are abelian groups under ordinary addition of rationals.
+\end{exercise}
+
+\begin{solution}
+  Fix a prime \(p\).
+
+  \medskip\noindent\textbf{(1) The set \(R_p\) is an abelian group under addition.}
+
+  By definition, \(R_p\) consists of those rationals \(a/b\in\mathbb{Q}\) (in lowest terms, with \(b>0\)) such that \(\gcd(b,p)=1\).
+
+  \emph{Closure.}
+  Let \(\frac{a}{b},\frac{c}{d}\in R_p\) with \(\gcd(b,p)=\gcd(d,p)=1\).
+  Then
+  \[
+    \frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}.
+  \]
+  Since \(\gcd(b,p)=\gcd(d,p)=1\), we also have \(\gcd(bd,p)=1\).
+  When the fraction \(\frac{ad+bc}{bd}\) is reduced to lowest terms, its denominator divides \(bd\), hence is still relatively prime to \(p\).
+  Therefore \(\frac{a}{b}+\frac{c}{d}\in R_p\).
+
+  \emph{Identity.}
+  \(0=\frac{0}{1}\in R_p\) because \(\gcd(1,p)=1\).
+
+  \emph{Inverses.}
+  If \(\frac{a}{b}\in R_p\), then \(-\frac{a}{b}\in R_p\) and \(\frac{a}{b}+(-\frac{a}{b})=0\).
+
+  \emph{Associativity and commutativity.}
+  These are inherited from addition in \(\mathbb{Q}\).
+  Hence \(R_p\) is an abelian group under addition.
+
+  \medskip\noindent\textbf{(2) The set \(R^p\) is an abelian group under addition.}
+
+  By definition, \(R^p\) consists of rationals of the form \(\frac{a}{p^i}\) with \(a\in\mathbb{Z}\) and \(i\ge 0\).
+
+  \emph{Closure.}
+  Let \(\frac{a}{p^i},\frac{c}{p^j}\in R^p\).
+  Then
+  \[
+    \frac{a}{p^i}+\frac{c}{p^j}=\frac{a p^j + c p^i}{p^{i+j}}.
+  \]
+  This is again a rational whose denominator is a power of \(p\), so it lies in \(R^p\).
+
+  \emph{Identity.}
+  \(0=\frac{0}{p^0}\in R^p\).
+
+  \emph{Inverses.}
+  If \(\frac{a}{p^i}\in R^p\), then \(-\frac{a}{p^i}\in R^p\).
+
+  \emph{Associativity and commutativity.}
+  Again inherited from \(\mathbb{Q}\).
+  Therefore \(R^p\) is an abelian group under addition.
+\end{solution}
+
+\begin{exercise}
+  Let \(p\) be a prime and let \(Z(p^\infty)\) be the following subset of the group \(\mathbb{Q}/\mathbb{Z}\) (see Pg.27):
+  \[
+    Z(p^\infty)=\{ \overline{a/b}\in\mathbb{Q}/\mathbb{Z}\mid a,b\in\mathbb{Z}\text{ and }b=p^i\text{ for some }i\ge0\}.
+  \]
+  Show that \(Z(p^\infty)\) is an infinite group under the addition operation of \(\mathbb{Q}/\mathbb{Z}\).
+\end{exercise}
+
+\begin{solution}
+  Fix a prime \(p\). l
+  Recall that \(\mathbb{Q}/\mathbb{Z}\) is an abelian group under \(\overline{x}+\overline{y}=\overline{x+y}\).
+  We show that \(Z(p^\infty)\) is an (infinite) subgroup.
+
+  \medskip\noindent\textbf{Subgroup.}
+  Let \(\overline{a/p^i},\overline{c/p^j}\in Z(p^\infty)\) (where \(i,j\ge0\)).
+  Then in \(\mathbb{Q}/\mathbb{Z}\),
+  \[
+    \overline{\frac{a}{p^i}}+\overline{\frac{c}{p^j}}=\overline{\frac{a}{p^i}+\frac{c}{p^j}}=\overline{\frac{ap^j+cp^i}{p^{i+j}}}.
+  \]
+  Since \(p^{i+j}\) is again a power of \(p\), the sum lies in \(Z(p^\infty)\).
+  Also,
+  \[
+    -\overline{\frac{a}{p^i}}=\overline{-\frac{a}{p^i}}=\overline{\frac{-a}{p^i}}\in Z(p^\infty),
+  \]
+  and the identity element \(\overline{0}=\overline{0/1}\) belongs to \(Z(p^\infty)\) (take \(i=0\)).
+  Hence \(Z(p^\infty)\) is a subgroup of \(\mathbb{Q}/\mathbb{Z}\), and therefore a group (indeed abelian) under the induced operation.
+
+  \medskip\noindent\textbf{Infinitude.}
+  Consider the elements \(\overline{1/p^n}\in Z(p^\infty)\) for \(n\ge 1\).
+  We claim they are all distinct in \(\mathbb{Q}/\mathbb{Z}\).
+  If \(\overline{1/p^m}=\overline{1/p^n}\), then
+  \[
+    \frac{1}{p^m}-\frac{1}{p^n}\in\mathbb{Z}.
+  \]
+  Assume \(m<n\).
+  Then
+  \[
+    0<\frac{1}{p^m}-\frac{1}{p^n}=\frac{p^{n-m}-1}{p^n}<\frac{p^{n-m}}{p^n}=\frac{1}{p^m}\le 1,
+  \]
+  so the difference is an integer strictly between \(0\) and \(1\), which is impossible.
+  Thus \(m=n\).
+  Therefore the classes \(\overline{1/p^n}\) are pairwise distinct, and \(Z(p^\infty)\) is infinite.
+
+  Hence \(Z(p^\infty)\) is an infinite group under addition in \(\mathbb{Q}/\mathbb{Z}\).
+\end{solution}
+
+\begin{exercise}
+  The following conditions on a group \(G\) are equivalent:
+  (i) \(G\) is abelian; (ii) \((ab)^2=a^2b^2\) for all \(a,b\in G\); (iii) \((ab)^{-1}=a^{-1}b^{-1}\) for all \(a,b\in G;\) (iv) \((ab)^n=a^nb^n\) for all \(n\in\mathbb{Z}\) and all \(a,b \in G\); (v) \((ab)^n=a^nb^n\) for three consecutive integers \(n\) and all \(a,b\in G\).
+  Show that (v) \(\implies\) (i) is false if ``three'' is replaced by ``two.''
+\end{exercise}
+
+\begin{solution}
+  We prove the implications
+  \[
+  (i)\Longleftrightarrow(ii)\Longleftrightarrow(iii),\qquad(i)\Longrightarrow(iv)\Longrightarrow(v)\Longrightarrow(i),
+  \]
+  and then show that in \((v)\) the phrase ``three consecutive integers'' cannot
+  be weakened to ``two consecutive integers.''
+
+  \begin{enumerate}[label=(\roman*)]
+
+    \item[\((i)\Rightarrow(ii)\).]
+    If \(G\) is abelian, then \(ab=ba\), hence
+    \[
+      (ab)^2=abab=aabb=a^2b^2.
+    \]
+
+    \item[\((ii)\Rightarrow(i)\).]
+    Assume \((ab)^2=a^2b^2\) for all \(a,b\in G\). 
+    Then
+    \[
+      abab=aabb.
+    \]
+    Cancel \(a\) on the left to obtain \(bab=abb\), and then cancel \(b\) on the right to obtain \(ba=ab\).
+    Thus \(G\) is abelian.
+
+    \item[\((i)\Rightarrow(iii)\).]
+    If \(G\) is abelian, then \((ab)^{-1}=b^{-1}a^{-1}=a^{-1}b^{-1}\).
+
+    \item[\((iii)\Rightarrow(i)\).]
+    Assume \((ab)^{-1}=a^{-1}b^{-1}\) for all \(a,b\in G\).
+    Taking inverses of both sides gives
+    \[
+      ab=\bigl((ab)^{-1}\bigr)^{-1}=\bigl(a^{-1}b^{-1}\bigr)^{-1}=ba,
+    \]
+    so \(G\) is abelian.
+
+    \smallskip
+    Thus \((i),(ii),(iii)\) are equivalent.
+
+    \item[\((i)\Rightarrow(iv)\).]
+    Assume \(G\) is abelian.
+    For \(n\ge 0\),
+    \[
+      (ab)^n=\underbrace{(ab)\cdots(ab)}_{n\ \text{factors}}=\underbrace{a\cdots a}_{n\ \text{factors}}\underbrace{b\cdots b}_{n\ \text{factors}}=a^n b^n.
+    \]
+    For \(n<0\), write \(n=-m\) with \(m>0\). Then
+    \[
+      (ab)^n=(ab)^{-m}=\bigl((ab)^{-1}\bigr)^m=(a^{-1}b^{-1})^m=a^{-m}b^{-m}=a^n b^n,
+    \]
+    using commutativity.
+    Hence (iv) holds.
+
+    \item[\((iv)\Rightarrow(v)\).]
+    Immediate.
+
+    \item[\((v)\Rightarrow(i)\).]
+    Assume that for some three consecutive integers \(n=k,k+1,k+2\) we have
+    \[
+      (ab)^n=a^n b^n\qquad\text{for all }a,b\in G.
+    \]
+    We prove that \(G\) is abelian.
+
+    \medskip\noindent
+    \textbf{Step 1: From two consecutive exponents, get commutation with a power of \(b\).}
+    Using the identities for \(k\) and \(k+1\), we compute
+    \[
+      (ab)^{k+1}=(ab)^k(ab)=a^k b^k ab,
+    \]
+    and also
+    \[
+      (ab)^{k+1}=a^{k+1}b^{k+1}=a^k a b^k b.
+    \]
+    Equating these and cancelling \(a^k\) on the left gives
+    \[
+      b^kab=ab^k b.
+    \]
+    Cancelling \(b\) on the right yields
+    \begin{equation}\label{eq:commute-m}
+      b^k a = a b^k \qquad\text{for all }a,b\in G.
+    \end{equation}
+
+    Applying the same argument to the consecutive pair \(k+1,k+2\) gives
+    \begin{equation}\label{eq:commute-m+1}
+      b^{k+1} a = a b^{k+1}\qquad\text{for all }a,b\in G.
+    \end{equation}
+
+    \medskip\noindent
+    \textbf{Step 2: Consecutive powers force commutation with \(b\).}
+    Since \(\gcd(k,k+1)=1\), there exist integers \(u,v\) such that
+    \[
+      uk+v(k+1)=1.
+    \]
+    Hence, for every \(b\in G\),
+    \[
+      b=b^{\,uk+v(k+1)}=(b^k)^u\,(b^{k+1})^v.
+    \]
+    By \eqref{eq:commute-m} and \eqref{eq:commute-m+1}, every element \(a\in G\) commutes with \(b^k\) and with \(b^{k+1}\), hence also with all their integer powers and with their product.
+    Therefore \(ab=ba\) for all \(a,b\in G\), so \(G\) is abelian.
+
+    Thus \((v)\Rightarrow(i)\).
+
+  \end{enumerate}
+
+  \medskip\noindent\textbf{Failure for ``two consecutive integers''.}
+  If in (v) we require the identity \((ab)^n=a^n b^n\) only for two consecutive integers, we may take \(n=0,1\).
+  But for every group and all \(a,b\),
+  \[
+    (ab)^0=e=a^0b^0,\qquad (ab)^1=ab=a^1b^1.
+  \]
+  Thus the weakened condition holds in every group, including nonabelian groups (e.g.\ \(D_4\)), so it does not imply that \(G\) is abelian.
+\end{solution}
+
+\begin{exercise}
+  If \(G\) is a group, \(a,b\in G\) and \(bab^{-1}=a^r\) for some \(r\in\mathbb{N}\), then \(b^jab^{-j} = a^{r^j}\) for all \(j\in\mathbb{N}\).
+\end{exercise}
+
+\begin{solution}
+  We prove the statement by induction on \(j\in\mathbb{N}\).
+
+  \medskip\noindent\textbf{Base case.}
+  For \(j=0\) we have \(b^0ab^{-0}=a\), and \(a^{r^0}=a^1=a\), so the formula holds.
+  For \(j=1\) the formula is exactly the hypothesis \(bab^{-1}=a^r\).
+
+  \medskip\noindent\textbf{Inductive step.}
+  Assume for some \(j\ge 0\) that
+  \[
+    b^j a b^{-j} = a^{r^j}.
+  \]
+  Conjugate both sides by \(b\).
+  Using \(bxb^{-1}\) as an automorphism of \(G\), we obtain
+  \[
+    b^{j+1}ab^{-(j+1)} = b\,(b^j a b^{-j})\,b^{-1} = b\,a^{r^j}\,b^{-1} = (bab^{-1})^{r^j}.
+  \]
+  (The last equality uses the general fact that conjugation preserves powers:
+  \(b x^n b^{-1}=(bxb^{-1})^n\) for all \(n\in\mathbb{N}\), proved by a short induction on \(n\).)
+
+  Now apply the hypothesis \(bab^{-1}=a^r\):
+  \[
+    (bab^{-1})^{r^j} = (a^r)^{r^j} = a^{r\cdot r^j}=a^{r^{j+1}}.
+  \]
+  Thus
+  \[
+    b^{j+1}ab^{-(j+1)}=a^{r^{j+1}},
+  \]
+  completing the induction.
+
+  Therefore \(b^j a b^{-j} = a^{r^j}\) for all \(j\in\mathbb{N}\).
+\end{solution}
+
+\begin{exercise}
+  If \(a^2=e\) for all elements \(a\) of a group \(G\), then \(G\) is abelian.
+\end{exercise}
+
+\begin{solution}
+  Assume that \(a^2=e\) for every \(a\in G\).
+  Then each element is its own inverse:
+  indeed \(a^2=e\) implies \(a^{-1}=a\).
+
+  Let \(a,b\in G\).
+  Consider \((ab)^2\).
+  By the hypothesis, \((ab)^2=e\), so
+  \[
+    (ab)(ab)=e.
+  \]
+  But \((ab)^{-1}=b^{-1}a^{-1}=ba\), since \(a^{-1}=a\) and \(b^{-1}=b\).
+  Hence
+  \[
+    e=(ab)(ab) \quad\Longrightarrow\quad (ab)^{-1}=ab.
+  \]
+  Therefore \(ab=ba\).
+  Since \(a,b\) were arbitrary, \(G\) is abelian.
+\end{solution}
+
+\begin{exercise}
+  If \(G\) is a finite group of even order, then \(G\) contains an element \(a\ne e\) such that \(a^2=e\).
+\end{exercise}
+
+\begin{solution}
+  Let \(G\) be a finite group of even order.
+  Consider the set
+  \[
+    S=\{\,a\in G \mid a\neq e\,\}.
+  \]
+  For each \(a\in S\), either \(a=a^{-1}\) or \(a\neq a^{-1}\).
+
+  If \(a\neq a^{-1}\), then the elements \(a\) and \(a^{-1}\) are distinct and can be paired together.
+  Thus all elements of \(S\) that are \emph{not} equal to their own inverse can be partitioned into disjoint pairs \(\{a,a^{-1}\}\).
+
+  Since \(|G|\) is even, \(|S|=|G|-1\) is odd.
+  Removing an even number of elements (the paired elements) from the odd-sized set \(S\) leaves an odd number of elements.
+  Hence there must exist at least one element \(a\in S\) that is not paired with a distinct inverse, i.e.\ such that \(a=a^{-1}\).
+
+  For this element \(a\neq e\), we have \(a=a^{-1}\), which implies
+  \[
+    a^2=e.
+  \]
+  Thus \(G\) contains a non-identity element of order \(2\).
+\end{solution}
+
+\begin{exercise}
+  Let \(G\) be a nonempty finite set with an associative binary operation such that for all \(a,b,c\in G\) \(ab=ac\implies b=c\) and \(ba=ca\implies b=c\).
+  Then \(G\) is a group.
+  Show that this conclusion may be false if \(G\) is infinite.
+\end{exercise}
+
+\begin{solution}
+  \textbf{Finite case.}
+  Assume \(G\) is a nonempty finite set with an associative binary operation, and that both left and right cancellation hold:
+  \[
+    ab=ac\implies b=c,\qquad ba=ca\implies b=c.
+  \]
+  Fix \(a\in G\).
+  Consider the left translation \(L_a:G\to G\) given by \(L_a(x)=ax\).
+  Left cancellation says \(L_a\) is injective, hence (since \(G\) is finite) \(L_a\) is surjective.
+  Hence for every \(b\in G\) the equation
+  \[
+    ax=b
+  \]
+  has a solution \(x\in G\).
+
+  Similarly, consider the right translation \(R_a:G\to G\) given by \(R_a(x)=xa\).
+  Right cancellation implies \(R_a\) is injective, hence surjective.
+  Hence for every \(b\in G\) the equation
+  \[
+    ya=b
+  \]
+  has a solution \(y\in G\).
+
+  Thus for all \(a,b\in G\), both equations \(ax=b\) and \(ya=b\) are solvable in \(G\).
+  By Proposition~1.4, \(G\) is a group.
+
+  \medskip\noindent
+  \textbf{Infinite case (counterexample).}
+  Let \(G=\mathbb{N}=\{0,1,2,\dots\}\) with the operation \(+\).
+  Addition is associative, and both cancellation laws hold:
+  \[
+    a+b=a+c \implies b=c,\qquad b+a=c+a \implies b=c.
+  \]
+  However \((\mathbb{N},+)\) is not a group:
+  although \(0\) is an identity, most elements have no additive inverses in \(\mathbb{N}\) (for example, there is no \(x\in\mathbb{N}\) with \(1+x=0\)).
+  Hence the conclusion may fail when \(G\) is infinite.
+\end{solution}
+
+\begin{exercise}
+  Let \(a_1,a_2,\dots\) be a sequence of elements in a semigroup \(G\).
+  Then there exists a unique function \(\psi:\mathbf{N}^*\to G\) such that \(\psi(1)=a_1\), \(\psi(2)=a_1a_2\), \(\psi(3)=(a_1a_2)a_3\) and for \(n\ge1\), \(\psi(n+1)=(\psi(n))a_{n+1}\).
+  Note that \(\psi(n)\) is precisely the standard \(n\) product \(\prod_{i=1}^na_i\).
+  [\emph{Hint}: Applying the Recursion Theorem 6.2 of the Introduction with \(a=a_1\), \(S=G\) and \(f_n:G\to G\) given by \(x\mapsto xa_{n+2}\) yields a function \(\varphi:\mathbb{N}\to G\).
+  Let \(\psi=\varphi\theta\), where \(\theta:\mathbf{N}^*\to\mathbb{N}\) is given by \(k\mapsto k-1\).]
+\end{exercise}
+
+\begin{solution}
+  Let \(G\) be a semigroup and let \(a_1,a_2,\dots\) be a sequence in \(G\).
+  We apply the Recursion Theorem 6.2 from the Introduction in the form:
+
+  Given a set \(S\), an element \(a\in S\), and maps \(f_n:S\to S\) (\(n\in\mathbb{N}\)),
+  there exists a unique function \(\varphi:\mathbb{N}\to S\) such that
+  \[
+    \varphi(0)=a,\qquad \varphi(n+1)=f_n(\varphi(n))\ \ (n\in\mathbb{N}).
+  \]
+
+  Take \(S=G\) and \(a=a_1\).
+  For each \(n\in\mathbb{N}\), define
+  \[
+    f_n:G\to G,\qquad f_n(x)=x\,a_{n+2}.
+  \]
+  Since \(G\) is a semigroup, the product \(x\,a_{n+2}\) is defined for all \(x\in G\), so each \(f_n\) is well defined.
+  By the Recursion Theorem, there exists a unique \(\varphi:\mathbb{N}\to G\) satisfying
+  \[
+    \varphi(0)=a_1,\qquad \varphi(n+1)=\varphi(n)\,a_{n+2}\ \ (n\in\mathbb{N}).
+  \]
+
+  Now define \(\theta:\mathbf{N}^*\to\mathbb{N}\) by \(\theta(k)=k-1\), and set
+  \[
+    \psi := \varphi\circ\theta:\mathbf{N}^*\to G.
+  \]
+  Then
+  \[
+    \psi(1)=\varphi(0)=a_1,
+  \]
+  \[
+    \psi(2)=\varphi(1)=\varphi(0)a_2=a_1a_2,
+  \]
+  and in general for \(n\ge 1\),
+  \[
+    \psi(n+1)=\varphi(n)=\varphi(n-1)a_{n+1}=\psi(n)\,a_{n+1}.
+  \]
+  Thus \(\psi\) satisfies exactly the required recursion, so it exists.
+
+  For uniqueness: if \(\psi':\mathbf{N}^*\to G\) is another function satisfying \(\psi'(1)=a_1\) and \(\psi'(n+1)=\psi'(n)a_{n+1}\), define \(\varphi':\mathbb{N}\to G\) by \(\varphi'(n)=\psi'(n+1)\).
+  Then
+  \[
+    \varphi'(0)=\psi'(1)=a_1,\qquad \varphi'(n+1)=\psi'(n+2)=\psi'(n+1)a_{n+2} =\varphi'(n)a_{n+2}=f_n(\varphi'(n)).
+  \]
+  Hence \(\varphi'\) satisfies the same recursion as \(\varphi\), so by the Recursion Theorem \(\varphi'=\varphi\), and therefore \(\psi'=\varphi'\circ\theta =\varphi\circ\theta=\psi\).
+  Thus \(\psi\) is unique.
+
+  Finally, by construction \(\psi(n)=a_1a_2\cdots a_n\), i.e.\ the standard product \(\prod_{i=1}^n a_i\).
+\end{solution}
