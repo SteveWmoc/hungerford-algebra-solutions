@@ -1,0 +1,460 @@
+\section{Cyclic Groups}
+
+\setcounter{exercise}{0}
+
+\begin{exercise}
+  Let \(a\), \(b\) be elements of group \(G\).
+  Show that \(|a|=|a^{-1}|\); \(|ab|=|ba|\), and \(|a|=|cac^{-1}|\) for all \(c\in G\).
+\end{exercise}
+
+\begin{solution}
+  Let \(G\) be a group.
+
+  \medskip\noindent\textbf{(1) \(|a|=|a^{-1}|\).}
+  If \(|a|=n<\infty\), then \(a^n=e\), hence \((a^{-1})^n=(a^n)^{-1}=e\), so \(|a^{-1}|\mid n\).
+  Conversely, if \((a^{-1})^m=e\), then taking inverses gives \(a^m=e\), so \(|a|\mid m\).
+  Thus \(|a|=|a^{-1}|\).
+  If \(|a|=\infty\) and \((a^{-1})^n=e\) for some \(n\ge1\), then taking inverses gives \(a^n=e\), a contradiction.
+  Hence \(|a^{-1}|=\infty\) as well.
+
+  \medskip\noindent\textbf{(2) \(|ab|=|ba|\).}
+  Note that
+  \[
+    ba = a^{-1}(ab)a.
+  \]
+  Thus \(ba\) is conjugate to \(ab\).
+  By part (3) below (applied with \(c=a^{-1}\)), conjugate elements have the same order, so \(|ba|=|ab|\).
+
+  \medskip\noindent\textbf{(3) \(|a|=|cac^{-1}|\) for all \(c\in G\).}
+  If \(|a|=n<\infty\), then
+  \[
+    (cac^{-1})^n = ca^n c^{-1} = cec^{-1}=e,
+  \]
+  so \(|cac^{-1}|\mid n\).
+  Conversely, if \((cac^{-1})^m=e\), then
+  \[
+    e=(cac^{-1})^m = ca^m c^{-1},
+  \]
+  so \(a^m=e\), hence \(|a|\mid m\).
+  Therefore \(|cac^{-1}|=|a|\).
+  If \(|a|=\infty\), the same argument shows \(cac^{-1}\) cannot have finite order, so \(|cac^{-1}|=\infty\).
+
+  Thus \(|a|=|a^{-1}|\), \(|ab|=|ba|\), and \(|a|=|cac^{-1}|\) for all \(c\in G\).
+\end{solution}
+
+\begin{exercise}
+  Let \(G\) be an abelian group containing elements \(a\) and \(b\) of orders \(m\) and \(n\) respectively.
+  Show that \(G\) contains an element whose order is the least common multiple of \(m\) and \(n\).
+  [\emph{Hint}: first try the case when \((m,n)=1\).]
+\end{exercise}
+
+\begin{solution}
+  Let \(G\) be abelian, and let \(|a|=m\), \(|b|=n\).
+  Put
+  \[
+    \ell=\lcm(m,n).
+  \]
+  We will construct an element of order \(\ell\).
+
+  \medskip\noindent
+  \textbf{Lemma.}
+  If \(x,y\in G\) commute and \(|x|=r\), \(|y|=s\) with \((r,s)=1\), then \(|xy|=rs\).
+
+  \emph{Proof.}
+  Since \(xy=yx\), we have \((xy)^{rs}=x^{rs}y^{rs}=e\), so \(|xy|\mid rs\).
+  If \((xy)^k=e\), then \(x^k=y^{-k}\), so \(x^k\in\langle x\rangle\cap\langle y\rangle\).
+  Any element of \(\langle x\rangle\cap\langle y\rangle\) has order dividing both \(r\) and \(s\), hence (since \((r,s)=1\)) must be \(e\).
+  Thus \(x^k=e=y^k\), so \(r\mid k\) and \(s\mid k\), hence \(rs\mid k\).
+  Therefore \(|xy|=rs\). \qed
+
+  \medskip\noindent
+  Now write the prime-power factorization
+  \[
+    \ell=\prod_{p} p^{\gamma_p}, \qquad \gamma_p=\max\{v_p(m),v_p(n)\},
+  \]
+  where the product is over the finitely many primes dividing \(\ell\).
+
+  For each such prime \(p\), define an element \(x_p\in G\) of order \(p^{\gamma_p}\) as follows.
+  If \(\gamma_p=v_p(m)\) (so \(p^{\gamma_p}\mid m\)), set
+  \[
+    x_p=a^{\,m/p^{\gamma_p}}.
+  \]
+  Then (in the cyclic subgroup \(\langle a\rangle\)) we have
+  \[
+    |x_p|=\frac{m}{\gcd\!\left(m,\;m/p^{\gamma_p}\right)}=\frac{m}{m/p^{\gamma_p}}=p^{\gamma_p}.
+  \]
+  If instead \(\gamma_p=v_p(n)\), set
+  \[
+    x_p=b^{\,n/p^{\gamma_p}},
+  \]
+  and the same computation gives \(|x_p|=p^{\gamma_p}\).
+
+  Now define
+  \[
+  x=\prod_{p\mid \ell} x_p.
+  \]
+  Since \(G\) is abelian, all the \(x_p\) commute.
+  Moreover, the orders \(|x_p|=p^{\gamma_p}\) are pairwise relatively prime for distinct primes \(p\).
+  Applying the lemma repeatedly, we obtain
+  \[
+    |x|=\prod_{p\mid \ell} |x_p|=\prod_{p\mid \ell} p^{\gamma_p}=\ell=\lcm(m,n).
+  \]
+  Thus \(G\) contains an element of order \(\lcm(m,n)\).
+\end{solution}
+
+\begin{exercise}
+  Let \(G\) be an abelian group of order \(pq\), with \((p,q)=1\).
+  Assume there exist \(a,b\in G\) such that \(|a|=p\), \(|b|=q\) and show that \(G\) is cyclic.
+\end{exercise}
+
+\begin{solution}
+  Let \(G\) be abelian with \(|G|=pq\), where \((p,q)=1\), and suppose there exist elements \(a,b\in G\) with \(|a|=p\) and \(|b|=q\).
+
+  Since \(G\) is abelian, \(a\) and \(b\) commute.
+  By the coprime-order lemma (from the previous exercise), the element
+  \[
+    x=ab
+  \]
+  has order
+  \[
+    |x|=|a||b|=pq.
+  \]
+  Hence \(\langle x\rangle\) is a cyclic subgroup of \(G\) of order \(pq\).
+  But \(|\langle x\rangle|=|G|\), so \(\langle x\rangle=G\).
+
+  Therefore \(G\) is cyclic.
+\end{solution}
+
+\begin{exercise}
+  If \(f:G\to H\) is a homomorphism, \(a\in G\), and \(f(a)\) has finite order in \(H\), then \(|a|\) is infinite or \(|f(a)|\) divides \(|a|\).
+\end{exercise}
+
+\begin{solution}
+  Let \(f:G\to H\) be a homomorphism and let \(a\in G\).
+  Suppose \(f(a)\) has finite order \(|f(a)|=n\).
+
+  Then \((f(a))^n=e_H\), so
+  \[
+    e_H=(f(a))^n=f(a^n).
+  \]
+  Hence \(a^n\in \Ker f\).
+
+  If \(|a|=\infty\), we are done.
+
+  Otherwise \(|a|=m<\infty\).
+  Then \(a^m=e_G\), and since \(f(a^n)=e_H\), we have \(f(a)^{\,n}=e_H\).
+  By definition of order, \(n\) is the least positive integer with this property.
+  But \(f(a)^{\,m}=f(a^m)=e_H\) as well, so \(n\mid m\).
+  Therefore \(|f(a)|\) divides \(|a|\).
+
+  Thus \(|a|=\infty\) or \(|f(a)|\mid |a|\).
+\end{solution}
+
+\begin{exercise}
+  Let \(G\) be the multiplicative group of all nonsingular \(2\times2\) matrices with rational entries.
+  Show that \(a=\begin{pmatrix}0&-1\\1&0\end{pmatrix}\) has order \(4\) and \(b=\begin{pmatrix}0&1\\-1&-1\end{pmatrix}\) has order \(3\), but \(ab\) has infinite order.
+  Conversely, show that the additive group \(Z_2\oplus\Z\) contains nonzero elements \(a\), \(b\) of infinite order such that \(a+b\) has finite order.
+\end{exercise}
+
+\begin{solution}
+  Let \(G=GL_2(\Q)\).
+
+  \medskip\noindent\textbf{(1) The elements \(a\) and \(b\).}
+  Let
+  \[
+    a=\begin{pmatrix}0&-1\\[2pt]1&0\end{pmatrix}.
+  \]
+  Compute
+  \[
+    a^2=\begin{pmatrix}-1&0\\[2pt]0&-1\end{pmatrix}=-I,\qquad\text{so}\qquad a^4=(a^2)^2=(-I)^2=I.
+  \]
+  Since \(a\neq I\) and \(a^2=-I\neq I\), it follows that \(|a|=4\).
+
+  Next let
+  \[
+    b=\begin{pmatrix}0&1\\[2pt]-1&-1\end{pmatrix}.
+  \]
+  A direct multiplication gives
+  \[
+  b^2=\begin{pmatrix}-1&-1\\[2pt]1&0\end{pmatrix},\qquad b^3=b^2b=\begin{pmatrix}1&0\\[2pt]0&1\end{pmatrix}=I.
+  \]
+  Since \(b\neq I\), we conclude \(|b|=3\).
+
+  \medskip\noindent\textbf{(2) The element \(ab\) has infinite order.}
+  Compute
+  \[
+    ab=\begin{pmatrix}0&-1\\[2pt]1&0\end{pmatrix}\begin{pmatrix}0&1\\[2pt]-1&-1\end{pmatrix}=\begin{pmatrix}1&1\\[2pt]0&1\end{pmatrix}=u.
+  \]
+  We claim \(u^n\neq I\) for all \(n\ge 1\).
+  In fact one checks by induction that
+  \[
+    u^n=\begin{pmatrix}1&n\\[2pt]0&1\end{pmatrix}\qquad(n\in \N^*).
+  \]
+  Indeed, for \(n=1\) this is \(u\).
+  If \(u^n=\begin{pmatrix}1&n\\0&1\end{pmatrix}\), then
+  \[
+    u^{n+1}=u^n u=\begin{pmatrix}1&n\\[2pt]0&1\end{pmatrix}\begin{pmatrix}1&1\\[2pt]0&1\end{pmatrix}=\begin{pmatrix}1&n+1\\[2pt]0&1\end{pmatrix}.
+  \]
+  Since \(n\neq 0\) for \(n\ge 1\), we have \(u^n\neq I\).
+  Thus \(|ab|=\infty\).
+
+  \medskip\noindent\textbf{(3) In \(Z_2\oplus \Z\) we can have \(|a|=|b|=\infty\) but \(|a+b|<\infty\).}
+  Work in the additive group \(Z_2\oplus \Z\).
+  Let
+  \[
+    a=(\overline{1},1),\qquad b=(\overline{1},-1).
+  \]
+  Then for \(k\in\Z\),
+  \[
+    k a = (k\overline{1},k) = (\overline{k},k),
+  \]
+  which equals \((\overline{0},0)\) only when \(k=0\).
+  Hence \(|a|=\infty\).
+  Similarly \(|b|=\infty\).
+
+  But
+  \[
+    a+b=(\overline{1}+\overline{1},\,1+(-1))=(\overline{0},0),
+  \]
+  so \(a+b\) has order \(1\) (finite).
+
+  Thus \(GL_2(\Q)\) contains torsion elements whose product has infinite order, while \(Z_2\oplus\Z\) contains infinite-order elements whose sum has finite order.
+\end{solution}
+
+\begin{exercise}
+  If \(G\) is a cyclic group of order \(n\) and \(k|n\), then \(G\) has exactly one subgroup of order \(k\).
+\end{exercise}
+
+\begin{solution}
+  Let \(G=\langle a\rangle\) be a cyclic group of order \(n\), and let \(k\mid n\).
+
+  \medskip\noindent\textbf{Existence.}
+  Define
+  \[
+    H=\langle a^{n/k}\rangle.
+  \]
+  Since
+  \[
+    |a^{n/k}|=\frac{n}{\gcd(n,n/k)}=\frac{n}{n/k}=k,
+  \]
+  the subgroup \(H\) has order \(k\).
+
+  \medskip\noindent\textbf{Uniqueness.}
+  Let \(K<G\) be any subgroup of order \(k\).
+  Since \(G\) is cyclic, every subgroup of \(G\) is cyclic, so \(K=\langle a^m\rangle\) for some integer \(m\).
+  The order of \(a^m\) is
+  \[
+    |a^m|=\frac{n}{\gcd(n,m)}.
+  \]
+  Since \(|K|=k\), we must have
+  \[
+    \frac{n}{\gcd(n,m)}=k \quad\Longrightarrow\quad \gcd(n,m)=\frac{n}{k}.
+  \]
+  This implies that \(m\) is a multiple of \(n/k\), so
+  \[
+    \langle a^m\rangle=\langle a^{n/k}\rangle.
+  \]
+  Hence \(K=H\).
+
+  \medskip\noindent
+  Therefore \(G\) has exactly one subgroup of order \(k\).
+\end{solution}
+
+\begin{exercise}
+  Let \(p\) be prime and \(H\) a subgroup of \(Z(p^\infty)\) (Exercise 1.10).
+  \begin{enumerate}[label=(\alph*)]
+  \item Every element of \(Z(p^\infty)\) has finite order \(p^n\) for some \(n\geq0\). 
+  \item If at least one element of \(H\) has order \(p^k\) and no element of \(H\) has order greater than \(p^k\), then \(H\) is the cyclic subgroup generated by \(\overline{1/p^k}\), whence \(H\cong Z_{p^k}\).
+  \item If there is no upper bound on the orders of elements of \(H\), then \(H=Z(p^\infty)\); [see Exercise 2.16].
+  \item The only proper subgroups of \(Z(p^\infty)\) are the finite cyclic groups \(C_n=\langle\overline{1/p^n}\rangle\) (\(n=1,2,\dots\)).
+  Furthermore, \(\langle0\rangle=C_0<C_1<C_2<C_3<\dots\).
+  \item Let \(x_1,x_2,\dots\) be elements of an abelian group \(G\) such that \(|x_1|=p,px_2=x_1,px_3=x_2,\dots,px_{n+1}=x_n,\dots\).
+  The subgroup generated by the \(x_i\) (\(i\ge1\)) is isomorphic to \(Z(p^\infty)\).
+  [Hint: Verify that the map induced by \(x_i\mapsto\overline{1/p^i}\) is a well-defined isomorphism.]
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+  Fix a prime \(p\).
+  Recall
+  \[
+    Z(p^\infty)=\left\{\overline{a/p^i}\in \Q/\Z\mid a\in\Z,\ i\ge 0\right\},
+  \]
+  and from Exercise~2.16 it is generated by \(\{\overline{1/p^n}\mid n\ge1\}\).
+
+  \begin{enumerate}[label=(\alph*)]
+  \item Let \(x=\overline{a/p^i}\in Z(p^\infty)\).
+  Then
+  \[
+    p^i x=\overline{a}\;=\overline{0},
+  \]
+  so \(x\) has finite order dividing \(p^i\).
+  Hence \(|x|=p^n\) for some \(0\le n\le i\).
+  (In particular, \(|\overline{0}|=p^0=1\).)
+
+  \item Assume \(H<\Z(p^\infty)\) contains an element of order \(p^k\) and no element of \(H\) has order \(>p^k\).
+  Let \(x\in H\) have order \(p^k\).
+  In the cyclic group \(\langle x\rangle\) there is a unique subgroup of order \(p^j\) for each \(0\le j\le k\), and in particular \(\langle x\rangle\) contains an element of order \(p^j\) for each \(j\le k\).
+
+  We claim \(H=\langle x\rangle\).
+  Suppose \(y\in H\).
+  Then \(|y|=p^t\) for some \(t\le k\) by (a).
+  Consider the subgroup \(\langle x\rangle\) of order \(p^k\).
+  Since \(Z(p^\infty)\) has exactly one subgroup of order \(p^t\), namely \(\langle \overline{1/p^t}\rangle\) (by the cyclic-group result applied to \(\langle\overline{1/p^k}\rangle\cong Z_{p^k}\)), both \(\langle y\rangle\) and the unique subgroup of \(\langle x\rangle\) of order \(p^t\) must coincide.
+  Hence \(y\in \langle x\rangle\).
+  Therefore \(H\subseteq\langle x\rangle\), and since \(x\in H\), equality holds: \(H=\langle x\rangle\).
+
+  Finally, any element of order \(p^k\) generates the unique subgroup of order \(p^k\), which is \(\langle\overline{1/p^k}\rangle\).
+  Hence
+  \[
+    H=\left\langle \overline{1/p^k}\right\rangle \cong Z_{p^k}.
+  \]
+
+  \item Assume there is no upper bound on the orders of elements of \(H\).
+  Then for each \(n\ge1\) there exists \(x_n\in H\) with \(|x_n|\ge p^n\).
+  By (a), \(|x_n|\) is a power of \(p\), so in particular \(H\) contains an element of order exactly \(p^n\):
+  if \(|x_n|=p^t\) with \(t\ge n\), then \(p^{t-n}x_n\) has order \(p^n\).
+
+  Thus \(H\) contains an element of order \(p^n\) for every \(n\ge1\), hence it contains the unique subgroup of order \(p^n\), namely \(\langle\overline{1/p^n}\rangle\).
+  Therefore
+  \[
+    \left\langle \overline{1/p^n}\right\rangle \subset H \quad\text{for all } n\ge1.
+  \]
+  But \(Z(p^\infty)\) is generated by \(\{\overline{1/p^n}\mid n\ge1\}\) (Exercise~2.16), so \(H\) contains all generators of \(Z(p^\infty)\), hence \(H=Z(p^\infty)\).
+
+  \item Let \(H\le Z(p^\infty)\) be a proper subgroup.
+  By (c), the orders of elements of \(H\) are bounded, so by (b) we have
+  \[
+    H=\left\langle \overline{1/p^k}\right\rangle =: C_k
+  \]
+  for some \(k\ge0\) (with \(C_0=\langle 0\rangle\)).
+  Hence the only proper subgroups are the finite cyclic groups \(C_n\) (\(n\ge0\)).
+
+  Moreover, since \(\overline{1/p^{n}}\) has order \(p^n\), we have strict inclusions
+  \[
+    C_0 < C_1 < C_2 < \cdots,
+  \]
+  and indeed \(C_n\subset C_{n+1}\) because
+  \[
+    \overline{\frac{1}{p^n}} = p\cdot \overline{\frac{1}{p^{n+1}}}\in C_{n+1}.
+  \]
+
+  \item Let \(G\) be abelian and suppose elements \(x_1,x_2,\dots\in G\) satisfy
+  \[
+    |x_1|=p,\qquad p x_2=x_1,\qquad p x_3=x_2,\ \dots,\ p x_{n+1}=x_n,\ \dots
+  \]
+  Let \(K=\langle x_i\mid i\ge1\rangle\le G\).
+  Define a map on generators by
+  \[
+    \phi(x_i)=\overline{1/p^i}\in Z(p^\infty).
+  \]
+  Since \(Z(p^\infty)\) is abelian and \(\phi(px_{i+1})=p\,\phi(x_{i+1})\), we have
+  \[
+    \phi(px_{i+1}) = p\cdot \overline{1/p^{i+1}}=\overline{1/p^i}=\phi(x_i),
+  \]
+  so \(\phi\) respects the defining relations \(px_{i+1}=x_i\).
+  Also \(|x_1|=p\) matches \(|\overline{1/p}|\! =p\), so no further relation is forced at level \(x_1\).
+  Hence \(\phi\) extends to a well-defined homomorphism \(\Phi:K\to Z(p^\infty)\).
+
+  The map \(\Phi\) is surjective because the elements \(\overline{1/p^i}\) generate \(Z(p^\infty)\) (Exercise~2.16), and each \(\overline{1/p^i}\) lies in the image.
+
+  To see injectivity, suppose \(\Phi\bigl(\sum_{i=1}^N c_i x_i\bigr)=0\) for some integers \(c_i\).
+  Choose \(N\) large enough so all terms occur.
+  Then
+  \[
+    0=\sum_{i=1}^N c_i\,\overline{1/p^i}\in \mathbb{Q}/\mathbb{Z}.
+  \]
+  Multiplying by \(p^N\) gives
+  \[
+    0=\sum_{i=1}^N c_i\, p^{N-i}\,\overline{1}\;=\;\overline{\sum_{i=1}^N c_i p^{N-i}},
+  \]
+  so \(\sum_{i=1}^N c_i p^{N-i}\in \Z\).
+  But this holds automatically; what we really get is that \(\sum_{i=1}^N c_i/p^i\in\Z\), hence \(\sum_{i=1}^N c_i/p^i=0\) in \(Z(p^\infty)\).
+  Using the relations \(x_i=p^{N-i}x_N\), we have in \(K\):
+  \[
+    \sum_{i=1}^N c_i x_i = \left(\sum_{i=1}^N c_i p^{N-i}\right) x_N.
+  \]
+  The coefficient is divisible by \(p^N\) exactly when \(\sum c_i/p^i\in\Z\), so the above element is \(0\) in \(K\) because \(p^N x_N = x_0:=0\).
+  Therefore \(\ker\Phi=0\), and \(\Phi\) is injective.
+
+  Hence \(\Phi\) is an isomorphism \(K\cong Z(p^\infty)\).
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}
+  A group that has only a finite number of subgroups must be finite.
+\end{exercise}
+
+\begin{solution}
+  Assume \(G\) is a group with only finitely many subgroups.
+  We prove \(G\) is finite by contrapositive.
+
+  Suppose \(G\) is infinite.
+  Choose an element \(a\in G\) with \(a\neq e\).
+  If \(a\) has infinite order, then \(G\) contains the infinite cyclic subgroup \(\langle a\rangle\cong \Z\).
+  But \(\Z\) has infinitely many distinct subgroups \(n\Z\) (\(n\in\N^*\)), hence \(\langle a\rangle\) has infinitely many subgroups, and therefore \(G\) has infinitely many subgroups.
+
+  If instead every nonidentity element of \(G\) has finite order, then \(G\) is an infinite torsion group.
+  Pick an infinite sequence of distinct elements \(a_1,a_2,\dots\) in \(G\).
+  The cyclic subgroups \(\langle a_i\rangle\) are finite.
+  If only finitely many distinct cyclic subgroups occurred among them, then their union would be a finite union of finite sets, hence finite, contradicting that \(\{a_i\}\) is infinite.
+  Therefore the subgroups \(\langle a_i\rangle\) yield infinitely many distinct subgroups of \(G\).
+
+  In either case, an infinite group has infinitely many subgroups.
+  Hence, if \(G\) has only finitely many subgroups, \(G\) must be finite.
+\end{solution}
+
+\begin{exercise}
+  If \(G\) is an abelian group, then the set \(T\) of all elements of \(G\) with finite order is a subgroup of \(G\). [Compare Exercise 5.]
+\end{exercise}
+
+\begin{solution}
+  Let \(G\) be an abelian group and let
+  \[
+    T=\{x\in G \mid |x|<\infty\}.
+  \]
+  We show \(T<G\) using Theorem~2.5.
+
+  First, \(e\in T\), since \(|e|=1\), so \(T\neq\varnothing\).
+  Let \(a,b\in T\).
+  Then \(|a|=m\) and \(|b|=n\) for some positive integers \(m,n\).
+  Because \(G\) is abelian, \(ab^{-1}=ab^{-1}=a(b^{-1})\) and \(a\) commutes with \(b^{-1}\).
+  Also \(|b^{-1}|=|b|=n\).
+  Hence
+  \[
+    (ab^{-1})^{mn}=a^{mn}(b^{-1})^{mn}=(a^m)^n\bigl((b^{-1})^n\bigr)^m=e,
+  \]
+  so \(ab^{-1}\) has finite order, i.e. \(ab^{-1}\in T\).
+
+  Therefore \(T\) is nonempty and closed under \(ab^{-1}\); by Theorem~2.5, \(T\) is a subgroup of \(G\).
+\end{solution}
+
+\begin{exercise}
+  An infinite group is cyclic if and only if it is isomorphic to each of its proper subgroups.
+\end{exercise}
+
+\begin{solution}
+  \textbf{(\(\Rightarrow\))} Suppose \(G\) is infinite cyclic.
+  Then \(G\cong \Z\).
+  Every proper subgroup of \(\Z\) is of the form \(n\Z\) for some integer \(n\ge 2\), and the map
+  \[
+    \Z\to n\Z,\qquad k\mapsto nk
+  \]
+  is an isomorphism (additively).
+  Hence every proper subgroup of \(G\) is isomorphic to \(G\).
+
+  \medskip\noindent\textbf{(\(\Leftarrow\))} Conversely, suppose \(G\) is an infinite group that is isomorphic to each of its proper subgroups.
+
+  First, \(G\) must contain an element of infinite order.
+  Indeed, if every element of \(G\) had finite order, then every cyclic subgroup \(\langle x\rangle\) would be finite.
+  Choose any \(x\neq e\); then \(\langle x\rangle\) is a proper finite subgroup, so \(G\cong \langle x\rangle\) would force \(G\) to be finite, a contradiction.
+  Thus there exists \(a\in G\) with \(|a|=\infty\).
+
+  Now consider the cyclic subgroup \(\langle a\rangle\).
+  It is infinite, hence \(\langle a\rangle\cong\Z\). If \(\langle a\rangle=G\), then \(G\) is cyclic and we are done.
+  If \(\langle a\rangle\ne G\), then \(\langle a\rangle\) is a proper subgroup, so by hypothesis \(G\cong \langle a\rangle\).
+  Therefore \(G\cong \Z\), and in particular \(G\) is cyclic.
+
+  Hence an infinite group is cyclic if and only if it is isomorphic to each of its proper subgroups.
+\end{solution}
+
